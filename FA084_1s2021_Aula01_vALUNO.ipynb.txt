@@ -1,0 +1,1761 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "FA084-1s2021-Aula01-vALUNO.ipynb",
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ByHC2tJBi_SO"
+      },
+      "source": [
+        "# 1. Exploração do Python 'Puro'"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "WFhiTYyFjsBO"
+      },
+      "source": [
+        "## 1.1. Listas ('list')\n",
+        "\n",
+        "Em Python, listas são como vetores com elementos que podem ser numéricos, alfanuméricos ou lógicos"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "XoDFebtUkR0L"
+      },
+      "source": [
+        "### 1.1.1. Criação de listas"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "DnTv1sRabHpP"
+      },
+      "source": [
+        "# Criar uma lista com elementos numéricos\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "EvrbZffKjnCb"
+      },
+      "source": [
+        "# Criar uma lista com elementos contendo letras (quatro primeiras letras do alfabeto)\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "_4AEK3d7kJCr"
+      },
+      "source": [
+        "# Criar uma lista com valores booleanos\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "cNyl0ny_IZTZ"
+      },
+      "source": [
+        "### 1.1.2. Dimensão de listas - Número de elementos na lista"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "oV3lqUZvNF_t"
+      },
+      "source": [
+        "# Saber dimensão de uma lista - len(lista)\n",
+        "a = [1,3,5,7,9,11,13,15]\n",
+        "comprimento_a = \n",
+        "comprimento_a"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "PBTBaoG5NGIC"
+      },
+      "source": [
+        "# Saber dimensão de uma lista - len(vetor)\n",
+        "b = ['A','B','C','D']\n",
+        "comprimento_b = \n",
+        "comprimento_b"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "A0UCg1vCNGPV"
+      },
+      "source": [
+        "# Saber dimensão de uma lista - len(vetor)\n",
+        "c = [True,False,True,False,True,True,False]\n",
+        "comprimento_c = \n",
+        "comprimento_c"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "pKJxJlOLJww1"
+      },
+      "source": [
+        "### 1.1.3. Consulta a elementos específicos de um vetor\n",
+        "\n",
+        "### OBS: Primeiro elemento de um vetor tem índice 0"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "VhczXdTRNOc5"
+      },
+      "source": [
+        "# Criar uma lista com os 8 primeiros números ímpares\n",
+        "a = [1,3,5,7,9,11,13,15]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XeXbTlhYNOlm"
+      },
+      "source": [
+        "# Primeiro elemento da lista (índice 0)\n",
+        "primeiro = \n",
+        "print(primeiro)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "wZvi-AjtNPDL"
+      },
+      "source": [
+        "# Segundo elemento da lista (índice 1)\n",
+        "segundo = \n",
+        "print(segundo)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "I9u_5CDHNPOP"
+      },
+      "source": [
+        "# Quinto elemento da lista (índice 4)\n",
+        "quinto = \n",
+        "print(quinto)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "61tfORrwKGuM"
+      },
+      "source": [
+        "### 1.1.4. Consulta a um intervalo de elementos de vetores\n",
+        "\n",
+        "### OBS: intervalo lower:higher ==> inclusive o 'lower' mas não o 'higher'\n",
+        "### [lower, higher)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "-Iw0q5xWNaH0"
+      },
+      "source": [
+        "# Criar uma lista com os 8 primeiros números ímpares\n",
+        "a = [1,3,5,7,9,11,13,15]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "W1M7PkEXNaQf"
+      },
+      "source": [
+        "# Segundo ao quarto elemento da lista (segundo, terceiro e quarto)\n",
+        "# No exemplo: 3, 5 e 7\n",
+        "dois_a_quatro = \n",
+        "print(dois_a_quatro)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "9iTLT_pBNaYZ"
+      },
+      "source": [
+        "# Do terceiro ao último\n",
+        "terceiro_em_diante = \n",
+        "print(terceiro_em_diante)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Vr9vGp9_NagU"
+      },
+      "source": [
+        "# Até o quinto (lembrar que o final do intervalo não está incluso)\n",
+        "ate_o_quinto = \n",
+        "print(ate_o_quinto)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "UNhGe1qqKSOk"
+      },
+      "source": [
+        "### 1.1.5. Verificação se um determinado elemento faz parte de uma lista.  \n",
+        "### Em outras palavras, se existe um determinado elemento em uma lista."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "oK8XxuPyNkAA"
+      },
+      "source": [
+        "# Criar uma lista de caracteres (strings) com as quatro primeiras letras do alfabeto, todas em maiúsculo\n",
+        "b = ['A','B','C','D']"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "5zWdvH2KNkQS"
+      },
+      "source": [
+        "# Verificar se 'C' é elemento da lista\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "wqH8sGtUNkbv"
+      },
+      "source": [
+        "# Verificar se 'K' é elemento da lista\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "2E0kQjEKNkIs"
+      },
+      "source": [
+        "# Criar uma lista com elementos numéricos com os 8 primeiros números ímpares\n",
+        "x = [1,3,5,7,9,11,13,15]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BeS0cQB0NkkU"
+      },
+      "source": [
+        "# Verificar se o número 7 é elemento da lista\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "lnCugbc_Nkry"
+      },
+      "source": [
+        "# Verificar se o número 8 é elemento da lista\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "HoQvbzZCKlsw"
+      },
+      "source": [
+        "### 1.1.6. Valores mínimos, máximos e somatório dos elementos de uma lista"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Eo7tY6bIW7lK"
+      },
+      "source": [
+        "x = [57, 45, 13, 81, 94, 26, 32, 75, 68]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "4HLX4xRFW857"
+      },
+      "source": [
+        "# Valor mínimo\n",
+        "x_min = \n",
+        "x_min"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "FuqXUKMzXAH9"
+      },
+      "source": [
+        "# Valor máximo\n",
+        "x_max = \n",
+        "x_max"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "8RCWm-mIXAYx"
+      },
+      "source": [
+        "# Somatório de todos os elementos\n",
+        "x_soma = \n",
+        "x_soma"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "AuTfaMT1XAkC"
+      },
+      "source": [
+        "# Soma dos três primeiros elementos\n",
+        "# No exemplo, 57, 45 e 13\n",
+        "x_soma_primeiro_ao_3 = \n",
+        "x_soma_primeiro_ao_3"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "I_KP6KVvXGwQ"
+      },
+      "source": [
+        "# Soma dos elementos 6 ao último\n",
+        "# No exemplo, 26, 32, 75 e 68\n",
+        "x_soma_6_ao_ultimo = \n",
+        "x_soma_6_ao_ultimo"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "3dHsepzmKpjc"
+      },
+      "source": [
+        "# Soma dos elementos 4 a 7\n",
+        "# No exemplo, 81, 94, 26 e 32\n",
+        "x_soma_4_ao_7 = \n",
+        "x_soma_4_ao_7"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "8Hl15mwNKqMv"
+      },
+      "source": [
+        "### 1.1.7. Adição de um elemento a uma lista já existente"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "jFBkZFVQXcz_"
+      },
+      "source": [
+        "# Lista com caracteres\n",
+        "m = ['Um', 'Dois', 'Tres', 'Quatro', 'Cinco', 'Seis']"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "lqOMA7mmXiry"
+      },
+      "source": [
+        "# Incluir a palavra 'Oito' após o último elemento da lista ==> usar append\n",
+        "print(m) # Antes de incluir\n",
+        "# Inclua aqui\n",
+        "\n",
+        "print(m) # Depois de incluir"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "eM1ni0ybX_ce"
+      },
+      "source": [
+        "# Lista com números\n",
+        "x = [57, 45, 13, 81, 94, 26, 32, 75, 68]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "RT2OIMyQYLBX"
+      },
+      "source": [
+        "# Incluir o número '17' na lista\n",
+        "\n",
+        "# Se for no final da lista, após o último elemento existente ==> usar append()\n",
+        "print(x) # Antes de incluir\n",
+        "\n",
+        "print(x) # Antes de incluir"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "RsRhP1pUKuD7"
+      },
+      "source": [
+        "# Se for para inserir em alguma outra parte da lista, usar insert()\n",
+        "\n",
+        "# Inserir a palavra 'Sete' como sétimo item, antes do 'Oito' previamente inserido\n",
+        "print(m) # Antes de incluir\n",
+        "\n",
+        "print(m) # Depois de incluir"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "qKWYX6lDKuR9"
+      },
+      "source": [
+        "### 1.1.8. Exclusão de um elemento de uma lista já existente"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "2yt3ulhaYmnw"
+      },
+      "source": [
+        "m = ['Um', 'Dois', 'Tres', 'Quatro', 'Cinco', 'Seis']\n",
+        "m.append('Oito')\n",
+        "m.insert(6,'Sete')\n",
+        "m"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OZ7d3REOYqVn"
+      },
+      "source": [
+        "# Excluir o último item ==> pop()\n",
+        "\n",
+        "m # Após exclusão"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "O0x-LB3xYqe6"
+      },
+      "source": [
+        "# Exlcuir um item específico, indicar o índice\n",
+        "# Exemplo: excluir a palavre 'Tres' (terceiro elemento, índice 2)\n",
+        "\n",
+        "m # Após exclusão"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Fg7gIytIYqoF"
+      },
+      "source": [
+        "# OBS: Nos dois casos, os itens foram removidos com base nos índices, ou seja, na posição do item dentro do vetor\n",
+        "# \n",
+        "# Porém,  há situações onde o índice é desconhecido e deseja-se remover o item a partir do seu valor.\n",
+        "# Utilizar o comando remove(item)\n",
+        "\n",
+        "# Considere a lista w\n",
+        "w = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K']\n",
+        "w"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "qyku37OLZ3sp"
+      },
+      "source": [
+        "# Deseja-se remover o item 'G'\n",
+        "\n",
+        "w # Após exclusão"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "FoUfFWneZh4Q"
+      },
+      "source": [
+        "# Utilizando uma lista com elementos numéricos\n",
+        "y = [57, 45, 13, 81, 94, 26, 32, 75, 68]\n",
+        "y"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OUxHuY2CZnwM"
+      },
+      "source": [
+        "# Remover o número 94\n",
+        "\n",
+        "y # Após exclusão"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "oR2SZkP0K6I8"
+      },
+      "source": [
+        "# OBS: Se o elemento a ser removido aparecer mais de uma vez, o comando remove APENAS A PRIMEIRA OCORRÊNCIA\n",
+        "k = ['a', 'b', 'c', 'd', 'a', 'f']\n",
+        "k\n",
+        "# Remover o elemento 'a'\n",
+        "\n",
+        "k # Após exclusão"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "YtjLWPVOK6T1"
+      },
+      "source": [
+        "### 1.1.9. Ordenar elementos de uma lista"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "x1swH96QaBX5"
+      },
+      "source": [
+        "# Números: ordem crescente \n",
+        "\n",
+        "y = [57, 45, 13, 81, 94, 26, 32, 75, 68]\n",
+        "y # Antes\n",
+        "\n",
+        "y # Depois"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ijX5kFLtaQer"
+      },
+      "source": [
+        "# Para ordenar em ordem decrescente, incluir 'reverse=True'\n",
+        "y = [57, 45, 13, 81, 94, 26, 32, 75, 68]\n",
+        "y  # Antes\n",
+        "\n",
+        "y  # Depois"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BYfZXBjLaYTl"
+      },
+      "source": [
+        "# Caracteres: ordem lexicográfica (ordem alfabético como no dicionário)\n",
+        "\n",
+        "w = ['A', 'K', 'C', 'I', 'H', 'F', 'G', 'E', 'D', 'J', 'B']\n",
+        "w  # Antes\n",
+        "\n",
+        "w  # Depois"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "7Nlt8WZgK-Vd"
+      },
+      "source": [
+        "# Caracteres em ordem inversa\n",
+        "\n",
+        "w  # Depois"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "URk7J8nmLFjh"
+      },
+      "source": [
+        "### 1.1.10. Determinar número de ocorrências de um determinado elemento em uma lista"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XdnS2WDrbI-1"
+      },
+      "source": [
+        "# Primeiro exemplo, com caracteres\n",
+        "w = ['A', 'K', 'C', 'A', 'H', 'F', 'K','G', 'E', 'D', 'J', 'B','K']\n",
+        "w"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "nNnsY60ZbJZv"
+      },
+      "source": [
+        "# Quantos 'A' existem na lista w?\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1IFHj8jDpA_H"
+      },
+      "source": [
+        "# Quantos 'K' existem na lista w?\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "wNEFF3XWpBKU"
+      },
+      "source": [
+        "# Quantos 'L' existem na lista w?\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "vYKklXITbJkx"
+      },
+      "source": [
+        "# Segundo exemplo, com números\n",
+        "y = [94, 57, 45, 13, 81, 94, 26, 13, 32, 75, 68, 13, 94, 41, 50, 13, 19, 43, 13, 94]\n",
+        "y"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "UyBUss8BLKM2"
+      },
+      "source": [
+        "# Quantos '13', quantos '94' e quantos '87' existem no vetor y?\n",
+        "print(y.count(13))\n",
+        "print(y.count(94))\n",
+        "print(y.count(87))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "OErumllLpggC"
+      },
+      "source": [
+        "## 1.2. Operações com listas\n",
+        "\n",
+        "*   Módulo (abs)\n",
+        "*   Arredondamento (round)\n",
+        "*   Média\n",
+        "*   Mediana\n",
+        "\n",
+        "*   SOMA DOS ELEMENTOS DE DUAS LISTAS\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "uFBQTOi4qeM7"
+      },
+      "source": [
+        "### 1.2.1. Módulo"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "JgaYBPciNySq"
+      },
+      "source": [
+        "# Comando 'abs' (de 'valor absoluto')\n",
+        "a = -3\n",
+        "modulo_a = \n",
+        "print(a)\n",
+        "print(modulo_a)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "OdqlQ6-pqkb0"
+      },
+      "source": [
+        "### 1.2.2. Arredondamento (round)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "4sflz_EUbndi"
+      },
+      "source": [
+        "a = 3.141592"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "rUppy1lgbuLF"
+      },
+      "source": [
+        "# Arredondar para dois dígitos\n",
+        "a_2 = \n",
+        "print(\"a = \",a,\"    a_2 = \", a_2)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "NVgr61L6buTY"
+      },
+      "source": [
+        "# Arredondar para três dígitos\n",
+        "a_3 = \n",
+        "print(\"a = \",a,\"    a_3 = \", a_3)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "93l3ZQHCN3CM"
+      },
+      "source": [
+        "# Arredondar para quatro dígitos\n",
+        "a_4 = \n",
+        "print(\"a = \",a,\"    a_4 = \", a_4)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "_5qx2QsXqknb"
+      },
+      "source": [
+        "### 1.2.3. Média"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "vJECPGjfrkeS"
+      },
+      "source": [
+        "# Considere a lista com valores numéricos\n",
+        "y = [94, 57, 45, 13, 81, 94, 26, 13, 32, 75, 68, 13, 94, 41, 50, 13, 19, 43, 13, 94]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6vhPOFSdrvul"
+      },
+      "source": [
+        "# Calcular a média\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "FM8dkJB2qk7x"
+      },
+      "source": [
+        "### 1.2.4. Mediana (utilizando biblioteca 'statistics')\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "jX_HPm9LsaQe"
+      },
+      "source": [
+        "# Será necessário utilizar a biblioteca 'statistics' (importar como 'st')\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "waQzeUvAp3G7"
+      },
+      "source": [
+        "# Considere a lista com valores numéricos\n",
+        "x = [43,27,8,13,5,31,1]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "r3zPYUh1p7Jh"
+      },
+      "source": [
+        "# Calcular a Mediana\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "QUJiwEuZtPAd"
+      },
+      "source": [
+        "### 1.2.5. Média (utilizando biblioteca 'statistics')"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Z2Og-69BtTgx"
+      },
+      "source": [
+        "# Considere a lista com valores numéricos\n",
+        "y = [94, 57, 45, 13, 81, 94, 26, 13, 32, 75, 68, 13, 94, 41, 50, 13, 19, 43, 13, 94]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "vQunFUhstTgz"
+      },
+      "source": [
+        "# Calcular a média utilizando a biblioteca 'statistics'\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Nam6O5cmt7El"
+      },
+      "source": [
+        "### 1.2.6. SOMA DOS ELEMENTOS DE DUAS LISTAS"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "_twDbR0Vtuoz"
+      },
+      "source": [
+        "# Considere duas listas com elementos numéricos: x1 e x2\n",
+        "x1 = [1,3,5,7]\n",
+        "x2 = [2,4,6,8]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ndW-gXAMuMer"
+      },
+      "source": [
+        "# Criar uma lista com a soma dos elementos das listas x1 e x2\n",
+        "# Esperado: s_x1_x2 = [3,7,11, 15]\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "kyL0H8v0u4Wy"
+      },
+      "source": [
+        "# 2. Numpy - Biblioteca para a linguagem Python \n",
+        "\n",
+        "*   Suporta arrays e matrizes multidimensionais.\n",
+        "*   Possui grande coleção de funções matemáticas.\n",
+        "\n",
+        "*   É convenção importar Numpy com o codinome 'np'\n",
+        "\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "DtJDWWWGvlVH"
+      },
+      "source": [
+        "# Importar biblioteca Python como 'np'\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "JPb58b77v5ZY"
+      },
+      "source": [
+        "## 2.1. Preenchimento de um vetor (array) com 'n' elementos, todos com um único valor"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1Y3XPI0xdALd"
+      },
+      "source": [
+        "# Vetor com 'n' elementos totalmente preenchidos com valor 0 \n",
+        "# np.zeros(shape = n)\n",
+        "# OBS: Pode-se omitir a expressão \"shape =\"\n",
+        "\n",
+        "# Criar um vetor x com 10 elementos, totalmente preenchido com valor 0\n",
+        "x = \n",
+        "print(x)   # Imprimir o vetor criado"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "DSgLB73Cdkqe"
+      },
+      "source": [
+        "# Vetor com 'n' elementos totalmente preenchidos com valor 1 \n",
+        "# np.ones(shape = n)\n",
+        "\n",
+        "# Criar um vetor y com 15 elementos, totalmente preenchido com valor 1\n",
+        "y = \n",
+        "print(y)   # Imprimir o vetor criado"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "SE1H7RTxRSNA"
+      },
+      "source": [
+        "# Criar um vetor com 'n' elementos totalmente preenchidos com um único valor\n",
+        "# np.full(shape = n, fill_value = value)\n",
+        "\n",
+        "# Criar um vetor w com 8 elementos com todos os elementos iguais a 12.7\n",
+        "w = "
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "RiMKQ_-rwzQf"
+      },
+      "source": [
+        "## 2.2. Vetor com sequências regulares\n",
+        "\n",
+        "*   Determinar valores inicial e final\n",
+        "*   Determinar passo\n",
+        "*   Comandos do Numpy: 'arange' e 'linspace'\n",
+        "*   Consultar 'help' para verificar sintaxe e parâmetros\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "hNx1OA2kxYO4"
+      },
+      "source": [
+        "# Consultar 'help' para 'arange'\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6ewyxFIvyC95"
+      },
+      "source": [
+        "# Consultar 'help' para 'linspace'\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "iXC3_ssIe3rl"
+      },
+      "source": [
+        "# Vetor iniciando em 0 e terminando em 12, com passo 2\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "fqK7m6Y6Spz5"
+      },
+      "source": [
+        "# Vetor iniciando em 0 e terminando em 12, com 20 elementos\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "YDSZQyYDyTXc"
+      },
+      "source": [
+        "## 2.3. Vetor com números aleatorios (randômicos)\n",
+        "\n",
+        "*   Entre 0 e 1 (random.random)\n",
+        "*   Valores inteiros dentro de um intervalo (random.randint)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "YEd7zf4Iy9vl"
+      },
+      "source": [
+        "# Criar um vetor com 15 elementos, contendo números aleatórios entre 0 e 1 e distribuição uniforme.\n",
+        "x = "
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Z0BjdGgtUPk0"
+      },
+      "source": [
+        "# Criar um vetor com 15 elementos, entre 1 e 50, e distribuição uniforme.\n",
+        "w = "
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "DsiQNBsGzXNd"
+      },
+      "source": [
+        "## 2.4. Amostragem de um vetor com n elementos (com ou sem reposição)\n",
+        "\n",
+        "- Comando 'choice'"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "hPbSaGSXVIN6"
+      },
+      "source": [
+        "# Considere um vetor w com 20 elementos\n",
+        "w = np.arange(20)\n",
+        "print('w = ',w)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "UKUWMIHcznqP"
+      },
+      "source": [
+        "# Criar um vetor com 10 elementos extraídos de w (SEM reposição)\n",
+        "x = \n",
+        "print('x = ',x)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Nd-prleQzp1X"
+      },
+      "source": [
+        "# Criar um vetor com 10 elementos extraídos de w (COM reposição)\n",
+        "y = \n",
+        "print('y = ',y)\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "8S0NSCgk0EOV"
+      },
+      "source": [
+        "# 3. Pandas - Biblioteca para a linguagem Python \n",
+        "\n",
+        "*   Biblioteca especializada para manipulação e análise de dados.\n",
+        "*   Oferece estruturas e operações para manipular tabelas numéricas e séries temporais.\n",
+        "\n",
+        "*   É convenção importar Pandas com o codinome 'pd'\n",
+        "\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "pafFOzOS0EOW"
+      },
+      "source": [
+        "# Importar biblioteca Python como 'pd'\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "JXIfSPIB0EOX"
+      },
+      "source": [
+        "## 3.1. 'Series'\n",
+        "\n",
+        "Na biblioteca Pandas, um vetor é denominado 'Series'\n",
+        "\n",
+        "- Possui uma única dimensão (linha ou coluna)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "S3k0hv1cXhku"
+      },
+      "source": [
+        "# Criar dois vetores P1 e P2, que representam as notas das provas P1 e P2 de 10 alunos de uma disciplina\n",
+        "P1 = \n",
+        "P2 = "
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "JGZqBSBk1j9M"
+      },
+      "source": [
+        "# Consultar P1\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "7xA-A9651kML"
+      },
+      "source": [
+        "# Consultar P2\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "olpuGQo904Pg"
+      },
+      "source": [
+        "## 3.2. 'DataFrames'\n",
+        "\n",
+        "Na biblioteca Pandas, uma matriz (ou tabela) é denominada 'DataFrame'\n",
+        "\n",
+        "*   Possui duas dimensões (linhas e colunas)\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "8jJ50x99UOP_"
+      },
+      "source": [
+        "# Transformar os vetores (Series) P1 e P2 em colunas de uma tabela (DataFrame)\n",
+        "df = \n",
+        "\n",
+        "print(df)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "pOoaN-YgagBA"
+      },
+      "source": [
+        "## 3.2.1. Criação de uma nova coluna a um DataFrame existente"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "M0gOj_VyU4tG"
+      },
+      "source": [
+        "# Criar e acrescentar à tabela uma coluna com os dados de um vetor previamente criado\n",
+        "\n",
+        "# Criar um vetor com a identificação de cada item do vetor correspondente ao que será cada linha da tabela\n",
+        "identif = pd.Series(['Aluno_01','Aluno_02','Aluno_03','Aluno_04','Aluno_05',\n",
+        "                   'Aluno_06','Aluno_07','Aluno_08','Aluno_09','Aluno_10'\n",
+        "                   ])\n",
+        "\n",
+        "Criar a coluna 'Nomes' no DataFrame df\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "6via4GG9amrq"
+      },
+      "source": [
+        "# Acrescentar uma coluna a um dataframe a partir de cálculos feitos com outras colunas\n",
+        "\n",
+        "# Criar a coluna 'Média' que calcule as médias dos alunos (média das linhas)\n",
+        "df['Media'] = \n",
+        "\n",
+        "df.head()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mxzZf4v6VBg2"
+      },
+      "source": [
+        "# Se o objetivo for saber a média de cada prova (média das colunas)\n",
+        "mean_P = \n",
+        "mean_P"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "SahclGYEVUnL"
+      },
+      "source": [
+        "# Criação de uma nova coluna denominada 'Aprovados', incicialmente com todos registros contendo valor 'N'\n",
+        "\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "-4B6gPYgVaT_"
+      },
+      "source": [
+        "# Em seguida, trocar 'N' por 'S' nas linhas em que 'Media' for maior ou igual a 5.0\n",
+        "\n",
+        "\n",
+        "df.head(10)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Op0UB0wjYycc"
+      },
+      "source": [
+        "# Para saber quantos alunos foram aprovados e quantos foram reprovados\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "cbdKRTKpVeMz"
+      },
+      "source": [
+        "# Se quiser que resultados seja apresentado no formato de uma lista\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "yBPQ4tb0hemP"
+      },
+      "source": [
+        "# Criar uma variável chamada N_Aprov e outra chamada N_Reprov, que contenha o número de alunos aprovados e reprovados, respectivamente\n",
+        "\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "x429zM5QZPhH"
+      },
+      "source": [
+        "## 3.2.2. Juntar dois ou mais DataFrames em um único\n",
+        "## Ex. df1, df2 e df3 em df\n",
+        "\n",
+        "## Utilizando comando 'concat'"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "edplHoBfWbUN"
+      },
+      "source": [
+        "# Os vetores P1 e P2 representam as notas das provas P1 e P2 dos alunos de uma disciplina. \n",
+        "# Considerar que são alunos de três salas: Sala1, Sala2 e Sala3\n",
+        "\n",
+        "P1_Sala1 = pd.Series([7,3,8])\n",
+        "P2_Sala1 = pd.Series([4,1,7])\n",
+        "\n",
+        "P1_Sala2 = pd.Series([5,9,2])\n",
+        "P2_Sala2 = pd.Series([8,1,4])\n",
+        "\n",
+        "P1_Sala3 = pd.Series([2,3,7,9])\n",
+        "P2_Sala3 = pd.Series([5,5,2,7])"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "55br03lMXK3s"
+      },
+      "source": [
+        "# Sala 1\n",
+        "df1 = pd.DataFrame({'P1':P1_Sala1,\n",
+        "                   'P2':P2_Sala1\n",
+        "                   })\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "IBcRysix27ZT"
+      },
+      "source": [
+        "# Sala 2\n",
+        "df2 = pd.DataFrame({'P1':P1_Sala2,\n",
+        "                   'P2':P2_Sala2\n",
+        "                   })\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "2P7tJccG27iC"
+      },
+      "source": [
+        "# Sala 3\n",
+        "df3 = pd.DataFrame({'P1':P1_Sala3,\n",
+        "                   'P2':P2_Sala3\n",
+        "                   })"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "aPnNCk23XTP3"
+      },
+      "source": [
+        "# df1 - Notas dos alunos da Sala 1\n",
+        "print('Sala 1')\n",
+        "print(df1)\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "z1BzQuCh3I6F"
+      },
+      "source": [
+        "# df2 - Notas dos alunos da Sala 2\n",
+        "print('Sala 2')\n",
+        "print(df2)\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "71i53zQy3JAi"
+      },
+      "source": [
+        "# df3 - Notas dos alunos da Sala 3\n",
+        "print('Sala 3')\n",
+        "print(df3)\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "suFhWRTJZea0"
+      },
+      "source": [
+        "# Juntar os três dataframes em um único dataframe \n",
+        "# (Combinação vertical: df1 está acima de df2 que está acima de df3)\n",
+        "\n",
+        "new_df = \n",
+        "print(new_df)\n",
+        "\n",
+        "# Note-se que após a junção os índices ficaram como nos conjuntos originais."
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "_3IBci73chVd"
+      },
+      "source": [
+        "# Pode-se reorganizar o índice com o comando reset_index\n",
+        "\n",
+        "print(new_df)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "4nk8vQTCZhT7"
+      },
+      "source": [
+        "# Poderia ter sido utilizado o comando ignore_index quando se fez a junção\n",
+        "# para que os índices já sem atualizados automaticamente\n",
+        "\n",
+        "print(new_df2)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "bTcox85qZi8w"
+      },
+      "source": [
+        "# Quando se pretende juntar dataframes na horizontal \n",
+        "# (df1 ao lado de df2 ao lado de df3) utiliza-se axis=1\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "-UgrrHPQPh_s"
+      },
+      "source": [
+        "# ATIVIDADE PRÁTICA"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "lBMGxsEf31kB"
+      },
+      "source": [
+        "## Considere as seguintes listas, em que Tmax e Tmin representam as Temperaturas Máximas e Mínimas ocorridas nos dias apresentados."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OlMVniaI4qQB"
+      },
+      "source": [
+        "Dias = ['Dia1','Dia2','Dia3','Dia4','Dia5','Dia6','Dia7','Dia8','Dia9','Dia10']\n",
+        "Tmax = [31.0,32.0,34.0,35.0,36.0,37.0,34.0,35.0,34.0,33.0]\n",
+        "Tmin = [23.0,22.0,23.0,24.0,23.0,26.0,22.0,23.0,23.0,22.0]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "1jpxc0Ud5d_w"
+      },
+      "source": [
+        "### Exercício 1: Construa um DataFrame, no qual as colunas sejam as listas 'Dias', 'Tmax' e 'Tmin'"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ED_TW5Tl4jma"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "IJkOzNDH6KNL"
+      },
+      "source": [
+        "### Exercício 2: Crie uma nova coluna (AmpT), que apresente a 'Amplitude Térmica': Tmax-Tmin"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "G-QXSp1h6LQm"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "jRlQB_QK6eHs"
+      },
+      "source": [
+        "### Exercício 3: Qual a maior e a menor Amplitude Térmica?"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "bWMLqeHd6lX_"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "CwQHFbcu6e1O"
+      },
+      "source": [
+        "### Exercício 4: Qual a média das Temperaturas Máxima, Mínima e Amplitude Térmica?"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "y2iF_Zm0LGtV"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
