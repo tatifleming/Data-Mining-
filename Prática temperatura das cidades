@@ -1,0 +1,97 @@
+# Exercício 01
+# Questão 1
+
+TmaxA = [31.0,32.0,34.0,35.0,36.0,37.0,34.0,35.0,34.0,33.0]
+TminA = [23.0,22.0,23.0,24.0,23.0,26.0,22.0,23.0,23.0,22.0]
+TmaxB = [28.2,30.0,30.4,30.4,31.4,31.4,33.0,33.6,32.0,28.0]
+TminB = [18.2,17.8,18.0,18.4,17.8,19.8,20.0,19.6,19.8,19.2]
+
+print(TmaxA)
+print(TmaxB)
+print(TminA)
+print(TminB)
+print(type(TmaxA))
+print(type(TmaxB))
+print(type(TminA))
+print(type(TminB))
+
+#tipo lista
+
+
+import numpy as np #para fazer vetores (arange/array)
+
+#Juntar TmaxA com TminA
+
+TmaxA.append(TminA)
+
+TmaxA + TminA
+
+print(TmaxA.append(TminA))
+
+print(TmaxA)
+
+import numpy as np
+
+TmaxA = [31.0,32.0,34.0,35.0,36.0,37.0,34.0,35.0,34.0,33.0]
+TminA = [23.0,22.0,23.0,24.0,23.0,26.0,22.0,23.0,23.0,22.0]
+TmaxB = [28.2,30.0,30.4,30.4,31.4,31.4,33.0,33.6,32.0,28.0]
+TminB = [18.2,17.8,18.0,18.4,17.8,19.8,20.0,19.6,19.8,19.2]
+
+np.sum(TmaxA)
+np.sum(TminA)
+
+a = TmaxA + TminA
+
+np.sum(a)
+
+np.mean(a)   #média das temperaturas
+
+
+# Questão 2
+
+TmaxA = [31.0,32.0,34.0,35.0,36.0,37.0,34.0,35.0,34.0,33.0]
+TminA = [23.0,22.0,23.0,24.0,23.0,26.0,22.0,23.0,23.0,22.0]
+TmaxB = [28.2,30.0,30.4,30.4,31.4,31.4,33.0,33.6,32.0,28.0]
+TminB = [18.2,17.8,18.0,18.4,17.8,19.8,20.0,19.6,19.8,19.2]
+
+import numpy as np
+
+a = TmaxA + TmaxB
+
+b = TminA + TminB
+
+print(a)
+
+print(b)
+
+#para o caso de amostragem aleatória, não precisa transformar a lista em vetor, mas fizemos abaixo para ter como registro:
+
+a_np = np.array([a])
+
+print(a_np)
+
+b_np = np.array([b])
+
+print(b_np)
+
+#fazendo a amostragem aleatória de 5 elementos
+
+import random as rd
+
+from random import sample
+
+print(sample(a,5))
+
+#valor mínimo
+min(a)
+
+#valor máximo
+max(a)
+
+#média
+mean(a)
+
+
+
+
+
