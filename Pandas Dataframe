@@ -1,0 +1,136 @@
+import pandas as pd
+
+import numpy as np
+
+# Criar dois vetores P1 e P2, que representam as notas das provas P1 e P2 de 10 alunos de uma disciplina
+P1 = pd.Series([7,3,8,5,9,2,2,3,7,9])
+P2 = pd.Series([4,1,7,8,1,4,5,5,2,7])
+
+# Consultar P1
+P1
+# Consultar P2
+P2
+
+# Transformar os vetores (Series) P1 e P2 em colunas de uma tabela (DataFrame)
+df = pd.DataFrame({"P1":P1,
+                   "P2":P2})
+
+print(df)
+
+# Criar e acrescentar à tabela uma coluna com os dados de um vetor previamente criado
+
+# Criar um vetor com a identificação de cada item do vetor correspondente ao que será cada linha da tabela
+
+identif = pd.Series(['Aluno_01','Aluno_02','Aluno_03','Aluno_04','Aluno_05',
+                   'Aluno_06','Aluno_07','Aluno_08','Aluno_09','Aluno_10'
+                   ])
+
+#Criar a coluna 'Nomes' no DataFrame df
+df["Nomes"] = identif
+
+df
+
+# Acrescentar uma coluna a um dataframe a partir de cálculos feitos com outras colunas
+
+# Criar a coluna 'Média' que calcule as médias dos alunos (média das linhas)
+df['Media'] = df.mean(axis=1)
+
+df.head()
+
+# Se o objetivo for saber a média de cada prova (média das colunas)
+mean_P = mean_P = df.mean(axis=0)
+mean_P
+
+# Criação de uma nova coluna denominada 'Aprovados', incicialmente com todos registros contendo valor 'N'
+df["Aprovados"] = "N"
+df.head(10)
+
+
+#Em seguida, trocar 'N' por 'S' nas linhas em que 'Media' for maior ou igual a 5.0
+
+df['Aprovados'] = np.where(df['Media'] >= 5.0, 'S', 'N')
+
+df.head(10)
+
+
+# Para saber quantos alunos foram aprovados e quantos foram reprovados
+df["Aprovados"].value_counts()
+
+# Se quiser que resultados seja apresentado no formato de uma lista
+df["Aprovados"].value_counts().values.tolist()
+
+# Criar uma variável chamada N_Aprov e outra chamada N_Reprov, que contenha o número de alunos aprovados e reprovados, respectivamente
+
+N_Aprov, N_Reprov = df["Aprovados"].value_counts()
+print("N_Aprov: ", N_Aprov)
+print("N_Aprov: ", N_Reprov)
+
+# Os vetores P1 e P2 representam as notas das provas P1 e P2 dos alunos de uma disciplina. 
+# Considerar que são alunos de três salas: Sala1, Sala2 e Sala3
+
+P1_Sala1 = pd.Series([7,3,8])
+P2_Sala1 = pd.Series([4,1,7])
+
+P1_Sala2 = pd.Series([5,9,2])
+P2_Sala2 = pd.Series([8,1,4])
+
+P1_Sala3 = pd.Series([2,3,7,9])
+P2_Sala3 = pd.Series([5,5,2,7])
+
+# Sala 1
+df1 = pd.DataFrame({'P1':P1_Sala1,
+                   'P2':P2_Sala1
+                   })
+                   
+                   # Sala 2
+df2 = pd.DataFrame({'P1':P1_Sala2,
+                   'P2':P2_Sala2
+                   })
+
+
+# Sala 2
+df2 = pd.DataFrame({'P1':P1_Sala2,
+                   'P2':P2_Sala2
+                   })
+                   
+                   
+# Sala 3
+df3 = pd.DataFrame({'P1':P1_Sala3,
+                   'P2':P2_Sala3
+                   })
+                   
+# df1 - Notas dos alunos da Sala 1
+print('Sala 1')
+print(df1)
+                   
+# df2 - Notas dos alunos da Sala 2
+print('Sala 2')
+print(df2)
+
+# df3 - Notas dos alunos da Sala 3
+print('Sala 3')
+print(df3)
+
+
+# Juntar os três dataframes em um único dataframe 
+# (Combinação vertical: df1 está acima de df2 que está acima de df3)
+
+new_df = pd.concat([df1, df2, df3])
+print(new_df)
+
+# Note-se que após a junção os índices ficaram como nos conjuntos originais.
+
+# Pode-se reorganizar o índice com o comando reset_index
+
+new_df.reset_index(inplace=True, drop=True)
+print(new_df)
+
+# Poderia ter sido utilizado o comando ignore_index quando se fez a junção
+# para que os índices já sem atualizados automaticamente
+new_df2 = pd.concat([df1,df2,df3], ignore_index=True)
+print(new_df2)
+
+# Quando se pretende juntar dataframes na horizontal 
+# (df1 ao lado de df2 ao lado de df3) utiliza-se axis=1
+pd.concat([df1,df2,df3], axis=1)
+
