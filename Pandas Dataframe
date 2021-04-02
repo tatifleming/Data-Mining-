@@ -37,6 +37,8 @@ df['Media'] = df.mean(axis=1)
 
 df.head()
 
+#OBS: axis default = 0 (horizontal); axis = 1 (vertical)
+
 # Se o objetivo for saber a média de cada prova (média das colunas)
 mean_P = mean_P = df.mean(axis=0)
 mean_P
@@ -52,21 +54,62 @@ df['Aprovados'] = np.where(df['Media'] >= 5.0, 'S', 'N')
 
 df.head(10)
 
-
 # Para saber quantos alunos foram aprovados e quantos foram reprovados
 df["Aprovados"].value_counts()
 
-# Se quiser que resultados seja apresentado no formato de uma lista
+#Resultado desse exemplo: S: 5
+#                          N:5
+
+#Dependendo do comando que quisermos, o input pode ser lista ou pode ser valor numérico
+
+# Se quiser que o resultado seja apresentado no formato de vetor
+f["Aprovados"].value_counts().values
+
+# Se quiser que o resultado seja apresentado no formato de uma lista
 df["Aprovados"].value_counts().values.tolist()
 
+
 # Criar uma variável chamada N_Aprov e outra chamada N_Reprov, que contenha o número de alunos aprovados e reprovados, respectivamente
+# Ele aloca os valores de saída "S" e "N" do df["Aprovados"].value_counts() nas variáveis N_Aprov e N_Reprov
+
+#No CEIS, essas variáveis podem ser criadas em: Países que fizeram depósito de patente A61, países que não
+
 
 N_Aprov, N_Reprov = df["Aprovados"].value_counts()
 print("N_Aprov: ", N_Aprov)
 print("N_Aprov: ", N_Reprov)
 
-# Os vetores P1 e P2 representam as notas das provas P1 e P2 dos alunos de uma disciplina. 
+
+# Exemplificando acima
+#a = 7
+#b = 10
+#print(a)
+#print(b)
+# Em vez de fazem o que está acima, fazemos em python:
+# a, b = 7, 10
+
+
+#JUNTAR DOIS OU MAIS DATAFRAMES (PARÂMETROS) EM UM ÚNICO, ex: df1, df2 e df3 em df
+#utilizando concat
+
+
+#Dataframe são estruturas de dados bidimensionais (nesse caso é NotaxAlunosporsala)
+
+# No caso do CEIS, (GastoPIBxPaísXNúmerodepatentesxTipodeRenda)
+PIB_LowIncome = pd.Series ([colums, colums)]
+PIB_Lower_MiddleIncome = pd.Series ([colums, colums)]
+PIB_Upper_MiddleIncome = pd.Series ([colums, colums)]
+PIB_HighIncome = pd.Series ([colums, colums)]
+#Cada classe de renda tem um conjunto de países, filtrar
+#Cada Patente depositada está associada a um país
+
+#No caso do CEIS, podemos criar 4 dataframes (4 classes de renda), PIBemP&D, com diferentes tipos de patentes)
+
+
+# Os vetores P1 e P2 representam as notas das provas P1 e P2 dos alunos de uma disciplina.
 # Considerar que são alunos de três salas: Sala1, Sala2 e Sala3
+
+#Criando séries com os valores observados
 
 P1_Sala1 = pd.Series([7,3,8])
 P2_Sala1 = pd.Series([4,1,7])
@@ -77,60 +120,80 @@ P2_Sala2 = pd.Series([8,1,4])
 P1_Sala3 = pd.Series([2,3,7,9])
 P2_Sala3 = pd.Series([5,5,2,7])
 
-# Sala 1
+#criando dataframes 
+
+# Sala 1 (dataframe com apenas alunos da sala 1)
 df1 = pd.DataFrame({'P1':P1_Sala1,
                    'P2':P2_Sala1
                    })
                    
-                   # Sala 2
+# Sala 2 (dataframe apenas com alunos da sala 2)
 df2 = pd.DataFrame({'P1':P1_Sala2,
                    'P2':P2_Sala2
                    })
-
-
-# Sala 2
-df2 = pd.DataFrame({'P1':P1_Sala2,
-                   'P2':P2_Sala2
-                   })
-                   
-                   
-# Sala 3
+                                      
+# Sala 3 (dataframe apenas com alunos da sala 3)
 df3 = pd.DataFrame({'P1':P1_Sala3,
                    'P2':P2_Sala3
                    })
                    
-# df1 - Notas dos alunos da Sala 1
+#Temos 3 dataframes, todos com Notas P1 e P2, mas alunos diferentes
+                   
+# df1 - Notas dos alunos da Sala 1 (print para mostrar o df1)
 print('Sala 1')
 print(df1)
                    
-# df2 - Notas dos alunos da Sala 2
+# df2 - Notas dos alunos da Sala 2 (print para mostrar o df2)
 print('Sala 2')
 print(df2)
 
-# df3 - Notas dos alunos da Sala 3
+# df3 - Notas dos alunos da Sala 3 (print para mostrar o df3)
 print('Sala 3')
 print(df3)
 
 
-# Juntar os três dataframes em um único dataframe 
+# Juntar os três dataframes em um único dataframe (dataframe = parâmetros)
 # (Combinação vertical: df1 está acima de df2 que está acima de df3)
+# Nesse caso de concatenação/empilhamento vertical das informações de cada aluno, perco o label/informação de quem é o aluno, pois junto as salas por notas
+
+# Se eu não quiser perder a informação do aluno, preciso criar um novo atritubo (no caso do CEIS: nome dos países)
+
+ATENÇÃO! PROCURAR NO HELP
+
+# O comando concat só aceita lista, ele não aceita coisa numérica (array/vetor)
 
 new_df = pd.concat([df1, df2, df3])
 print(new_df)
 
-# Note-se que após a junção os índices ficaram como nos conjuntos originais.
+
+# Note-se que após a junção os índices ficaram como nos conjuntos originais
 
 # Pode-se reorganizar o índice com o comando reset_index
+
+new_df.reset_index
+print(new_df)
+
+#dessa forma acima, ele reorganiza por blocos de dataframes (no caso do CEIS, Income em blocos por PIB)
+# Por isso, é preciso acrescentar o "inplace"
+
+new_df.reset_index(inplace=True)
+
+#Dessa forma acima, ele continua com a antiga coluna de índice "desorganizada" e cria uma nova. Para excluir a desorganizada: drop = True
 
 new_df.reset_index(inplace=True, drop=True)
 print(new_df)
 
 # Poderia ter sido utilizado o comando ignore_index quando se fez a junção
 # para que os índices já sem atualizados automaticamente
+
 new_df2 = pd.concat([df1,df2,df3], ignore_index=True)
 print(new_df2)
 
+
 # Quando se pretende juntar dataframes na horizontal 
+
 # (df1 ao lado de df2 ao lado de df3) utiliza-se axis=1
 pd.concat([df1,df2,df3], axis=1)
+
+É importante para fazer combinação entre sequências de observações de datas
 
