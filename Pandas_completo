@@ -1,0 +1,114 @@
+# Ler o conjunto de dados 'iris.csv' e alocar em uma variável chamada df
+# Indicar a coluna Id como sendo o índice (usar index_col)
+#ctrl + barra de espaço para mostrar as opções de arquivos
+
+df = pd.read_csv('iris.csv')
+
+# Verificar as primeiras linhas do conjunto é sempre recomendado 
+df.head()
+
+# Verificar as últimas linhas do conjunto df: tail
+df.tail()
+
+# Verificar as dimensões (número de linhas e de colunas) do conjunto df: shape
+df.shape
+
+# Apresentar as estatísticas básicas do conjunto df: describe
+# Posso colocar algum parâmetro dentro dos parênteses se quiser
+df.describe()
+
+#Essa função acima é importante para saber se tem algum valor faltante. Para isso, é preciso tratar antes
+
+# Apresentar as características dos dados do conjunto df: info
+df.info()
+
+#float = valor real
+# é importante fazer essa exploração de dados iniciais para ver se tem lixo na entrada.
+
+# Apresentar os nomes das colunas dos dados do conjunto df: columns
+df.columns
+
+# Verificar se há e quantos são os valores faltantes: isnull().sum()
+# Experimentar COM e SEM o complemento 'sum()'
+
+df.isnull()
+df.isnull().sum()
+
+# Verificar os tipos (inteiro, real, categórico, etc.) de dados de cada atributo: dtypes
+df.dtypes
+
+# Verificar o valor mínimo para petal.width: min
+df['petal_length'].min()
+
+ou
+
+df.petal_length.min #maneira mais prática; nunca colocar atributos com espaço
+
+# Verificar o valor máximo para petal.width: max
+df['petal_length'].max()
+
+# Verificar a média para petal.width: mean
+df['petal_length'].mean()
+
+# Verificar a mediana para petal.width: median (50%)
+df['petal_length'].median()
+
+# Criar uma taxa (rate) entre comprimento (Lenght, L) e largura (Width, W) tanto para petala quanto para sepala
+# Rate_L_W_P e Rate_L_W_S  são as novas colunas (resultados da divisão)
+#Para o CEIS, podemos pensar em uma taxa de investimento em P&D/PIB pelo número de depósitos de patente (HÁ ALGUM PADRÃO?)
+
+df['Rate_L_W_P']= df.petal_length/df.petal_width
+df['Rate_L_W_S']= df.sepal_length/df.sepal_width
+
+# Apresentar os 10 primeiros registros
+
+df.head(10)
+
+
+
+# Calcular e apresentar a média e os desvios padrão das taxas Rate_L_W_P e Rate_L_W_S
+
+print('Média de Rate_L_W Petala:', df.Rate_L_W_P.mean() )
+
+print('Desvio Padrão de Rate_L_W Petala:', df.Rate_L_W_P.std)
+
+print('\n') # Pular uma linha
+
+print('Média de Rate_L_W Sepala:', df.Rate_L_W_S.mean() )
+
+print('Desvio Padrão de Rate_L_W Sepala:', df.Rate_L_W_S.std() )
+
+
+# Verificar quais espécies existem no conjunto de dados: unique
+#Valores únicos da coluna
+df.species.unique()
+
+OU
+
+df.species.value_counts()
+
+# Verificar quantos registros existem de cada espécie
+# Método size
+
+df.groupby('species').size()
+
+# Média, sdt etc para  cada espécie
+
+
+# Calcular a média e os desvios padrão das taxas Rate_L_W_Petal e Rate_L_W_Sepal PARA CADA ESPÉCIE
+# A vantagem de quebrar e visualizar a média e desvio padrão para cada espécie (no CEIS pode ser Income) é que dá uma amplitude analítica, do que se fizer pelo grupo todo
+
+Rate_L_W_P_Media = df.groupby('species').Rate_L_W_P.mean()
+print('Média Rate_L_W Petala:',Rate_L_W_P_Media)
+print('\n')
+Rate_L_W_P_DesvPadrao = df.groupby('species').Rate_L_W_P.std()
+print('Desvio Padrão Rate_L_W Petala:', Rate_L_W_P_DesvPadrao)
+print('\n')
+Rate_L_W_S_Media = df.groupby('species').Rate_L_W_S.mean()
+print('Média Rate_L_W Sepala:',Rate_L_W_S_Media)
+print('\n')
+Rate_L_W_S_DesvPadrao = df.groupby('species').Rate_L_W_S.std()
+print('Desvio Padrão Rate_L_W Sepala:', Rate_L_W_S_DesvPadrao)
+
+# groupby também tem no R
+# Cuidado ao trabalhar com média
