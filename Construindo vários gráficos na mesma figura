@@ -1,0 +1,138 @@
+#FIGURE, AXES, AXIS
+
+
+# plt.subplots(numero_linhas, numero_colunas)
+
+# Cada gráfico pode ter os detalhes diferentes
+
+# Em uma figura, construir um gráfico exatamente como o feito anteriormente
+# E, na mesma figura, construir um gráfico com as funções trigonométricas sen() e cos(x)
+
+# Inicialmente, é preciso definir a 'Figure', área que vai conter os gráficos,
+# e o 'Axes'
+
+# Neste exemplo, vamos criar dois gráficos, sendo um em cima do outro
+# Duas linhas e uma coluna
+
+fig, axes = plt.subplots(2,1, figsize = (7,7)
+
+# Linha de cima: Gráfico feito anteriormente (funções quadrática e cúbica) 
+x = np.linspace(0,10,100) 
+y = x**2
+z = x**3 - 5*x**2
+# axes no eixo 0, faça o plot x,y; como estou com 2 linhas e 1 coluna, preciso dizer em qual linha, axes 0 = 1ª lonha
+# axes[0].plot(x,y) não precisa
+axes[0].plot(x, y, color ='purple', ls = '-')
+axes[0].plot(x,z, color = 'orange', ls ='--')
+
+# Linha de baixo: Gráfico com a função sen(x) e cos(x) - Lembrar que são funções do numpy
+# o pi está no numpy, assim como as funções seno e coseno
+x = np.linspace(0,10*np.pi,100)
+y = np.sin(x)
+z = np.cos(x)
+axes[1].plot(x,y, color ='purple', ls = '-')
+axes[1].plot(x,z, color = 'orange', ls ='--')
+
+
+# Similar ao que foi feito em cima, mas em quatro células, cada figura em uma célula
+# Duas figuras em cima e duas embaixo (duas linhas e duas colunas de figuras)
+# Nas duas de cima, a função quadrática (à esquerda) e a cúbica (à direita)
+# Nas duas de baixo, a função sen(x) (à esquerda) e a função cos(x) (à direita)
+
+# Definir a 'Figure', área que vai conter os gráficos e o 'Axes'
+
+# Desta vez, vamos criar quatro gráficos, sendo dois em cima e dois embaixo
+# Duas linhas e duas colunas : subplot(2,2)
+fig, axes = plt.subplots(2,2, figsize(10,10))
+# Linha de cima à esquerda: Função quadrática
+x = np.linspace(0,10,100)  
+y = x**2
+axes [0,0].plot (x,y)
+# axes [0,0] porque indica a linha e a coluna
+# axes[0] era uma coluna só
+
+# Linha de cima à direita: Função cúbica
+x = np.linspace(0,10,100)  
+z = x**3 - 5*x**2
+axes [0,1].plot(x,z)
+# Linha de baixo à esquerda: Função sen(x)
+x = np.linspace(0,10*np.pi,100)
+y = np.sin(x)
+axes[1,0].plot(x,y)
+# Linha de baixo à direita: Função cos(x)
+x = np.linspace(0,10*np.pi,100)
+y = np.cos(x)
+axes[1,1].plot(x,z)
+
+# Se quiser que as figuras tenham as mesmos eixos e outros detalhes
+
+
+# Mesma figura, incluindo um título para cada gráfico
+
+# Definir a 'Figure', área que vai conter os gráficos e o 'Axes'
+
+# Desta vez, vamos criar quatro gráficos, sendo dois em cima e dois embaixo
+# Duas linhas e duas colunas
+fig, axes = plt.subplots(2,2, figsize(10,10)) 
+
+# Linha de cima à esquerda: Função quadrática
+x = np.linspace(0,10,100)  
+y = x**2
+axes [0,0].plot (x,y)
+axes[0,0].set_title('Função Quadrática')
+
+# Linha de cima à direita: Função cúbica
+x = np.linspace(0,10,100)  
+z = x**3 - 5*x**2
+axes [0,1].plot(x,z)
+axes[0,1].set_title('Função Cúbica')
+
+# Linha de baixo à esquerda: Função sen(x)
+x = np.linspace(0,10*np.pi,100)
+y = np.sin(x)
+axes[1,0].plot(x,y)
+axes[1,0].set_title('Função Senoidal')
+
+# Linha de baixo à direita: Função cos(x)
+x = np.linspace(0,10*np.pi,100)
+y = np.cos(x)
+axes[1,1].plot(x,z)
+axes[1,1].set_title('Função Coseno')
+
+
+# Figura acima, incluindo um título COMUM a todas as figuras
+
+# Definir a 'Figure', área que vai conter os gráficos e o 'Axes'
+# Logo após a definição da 'Figure', informar o título (fig.suptitle('Título desejado'))
+
+# Desta vez, vamos criar quatro gráficos, sendo dois em cima e dois embaixo
+# Duas linhas e duas colunas
+fig, axes = plt.subplots(2,2, figsize(10,10)) 
+
+# Título comum desejado: 'Funções Quadrática, Cúbica e Trigonométricas (Seno e Coseno)'
+
+fig.supertitle('Funções totais')
+
+# Linha de cima à esquerda: Função quadrática
+x = np.linspace(0,10,100)  
+y = x**2
+axes [0,0].plot (x,y)
+axes[0,0].set_title('Função Quadrática')
+
+# Linha de cima à direita: Função cúbica
+x = np.linspace(0,10,100)  
+z = x**3 - 5*x**2
+axes [0,1].plot(x,z)
+axes[0,1].set_title('Função Cúbica')
+
+# Linha de baixo à esquerda: Função sen(x)
+x = np.linspace(0,10*np.pi,100)
+y = np.sin(x)
+axes[1,0].plot(x,y)
+axes[1,0].set_title('Função Senoidal')
+
+# Linha de baixo à direita: Função cos(x)
+x = np.linspace(0,10*np.pi,100)
+y = np.cos(x)
+axes[1,1].plot(x,z)
+axes[1,1].set_title('Função Coseno')
