@@ -1,0 +1,191 @@
+# Inicialmente, usar Pandas para construir o gráfico
+
+# x='petal_length'
+# y = 'petal_width'
+df.plot.scatter(x='petal_length',y = 'petal_width')
+
+#esse gráfico é construído pelo pandas
+#agora vamos fazer pelo matplotlib
+
+# Fazer o mesmo gráfico, usando Matplotlib
+
+import matplotlib.pyplot as plt
+
+plt.scatter(df.petal_length, df.petal_width)
+
+# Repare que os gráficos em Pandas e em Matplotlib são similares, mas a vantagem do Matplotlib, consigo ajustar no pylot
+
+# Fazer o mesmo gráfico, usando Matplotlib
+# Acrescentar
+  # Título ao Gráfico ('Iris: Comprimento x Largura da pétala')
+  # Título do eixo x ('Comprimento da pétala')
+  # Título do eixo y ('Largura da pétala')
+
+plt.scatter(df.petal_length, df.petal_width)
+plt.title('Iris: Comprimento x Largura da pétala')
+plt.xlabel('Comprimento da pétala')
+plt.ylabel('Largura da pétala')
+
+# No pandas, não consigo fazer isso acima; ele dá os nomes dos eixos = atributos; por isso, usamos matplotlib
+
+# Repetir gráfico acima
+# Acrescentar
+  # Cores aos pontos, de acordo com as espécies
+
+  #Para o CEIS, grupos são as faixas de renda dos países, species são os países (nome que está na planilha)
+# Verificar se 'nome' e 'grupo' são default ou não
+
+grupos = df.groupby('species')
+fig, ax = plt.subplots()
+for nome, grupo in grupos:
+  ax.plot(grupo.petal_length, grupo.petal_width, marker='.', ls=' ', label=nome)
+
+ax.legend()
+
+
+# Acima o "for" indica o loop
+
+
+# Título geral: 'Iris: Comprimento x Largura da pétala';
+# Título eixo-x: 'Comprimento da pétala';
+# Título eixo-y: 'Largura da pétala';
+
+# Repetir figura acima, com cores separadas por espécie USANDO SEABORN
+
+import seaborn as sns
+# Importar biblioteca seaborn (apelido sns)
+
+sns.scatterplot(df.petal_length, df.petal_width, hue=df.species)
+# Scatterplot(x,y,hue)
+#hue é agrupamento
+#FutureWarning diz que em breve virá uma função melhor no futuro. No futuro será:
+sns.scatterplot(x=df.petal_length, y=df.petal_width, hue=df.species); 
+
+# Título geral: 'Iris: Comprimento x Largura da pétala';
+# Título eixo-x: 'Comprimento da pétala';
+# Título eixo-y: 'Largura da pétala';
+
+##Construir gráfico 'box plot'
+
+#Construir gráfico boxplot, usando Matplotlib
+
+# Inicialmente para um dos atributos numéricos
+# Por exemplo petal_length
+plt.boxplot(df.petal_length);
+
+# Construir gráfico boxplot, usando Matplotlib
+
+# Para vários atributos numéricos
+# Por exemplo: petal_length e petal_width (2 variáveis)
+
+cols = (df.petal_length, df.petal_width)
+plt.boxplot(cols);
+
+# Construir gráfico boxplot, usando Matplotlib
+
+# Repetir figura acima, identificando cada item do boxplot
+# Por exemplo, 'Comprimento da Pétala' e 'Largura da Pétala'
+
+cols = (df.petal_length, df.petal_width)
+nomes = ['Comprimento da Pétala', 'Largura da Pétala']
+plt.boxplot(cols, labels=nomes);
+
+# Construir histogramas
+
+# Construir histogramas, usando Matplotlib
+
+# Por exemplo, histograma para petal_length, com 'n' bins (experimentar n = 5, n = 10, n=20)
+# Histograma é graficamente a discretização
+
+plt.hist(df.petal_length, bins=10);
+
+
+Construir gráfico de barras
+
+
+# Construir gráfico de barras, usando Matplotlib
+
+# Por exemplo, 
+x = ['A', 'B', 'C', 'D']
+y = [15, 35, 20, 10]
+
+# Construir gráfico de barras HORIZONTAIS, usando Matplotlib
+
+# Por exemplo, 
+x = ['A', 'B', 'C', 'D']
+y = [15, 35, 20, 10]
+
+plt.bar(x,y)
+
+# Construir gráfico de barras, usando SEABORN
+
+# Por exemplo, 
+x = ['A', 'B', 'C', 'D']
+y = [15, 35, 20, 10]
+sns.barplot(x,y)
+
+# Para sumir o warning: x=x;y=y
+
+sns.barplot(x=x,y=y)
+
+# Construir gráfico de barras, usando Matplotlib e configurando escala do eixo y
+# Por exemplo, 
+x = ['A', 'B', 'C', 'D']
+y = [85, 87, 83, 89]
+plt.bar(x,y);
+
+# a importância de ter a escala é trazer maior precisão
+
+# Construir gráfico de barras, usando Matplotlib
+# Por exemplo, 
+x = ['A', 'B', 'C', 'D']
+y = [85, 87, 83, 89]
+
+# Configurar escala do eixo y
+y_min = 81
+y_max = 91
+
+# Definir limites do eixo y
+plt.ylim(y_min, y_max)
+
+plt.bar(x,y); 
+
+
+
+##Usar Quarteto de Anscombe para ilustrar problema de visualização
+
+import numpy as np
+
+
+x = [10, 8, 13, 9, 11, 14, 6, 4, 12, 7, 5]
+y1 = [8.04, 6.95, 7.58, 8.81, 8.33, 9.96, 7.24, 4.26, 10.84, 4.82, 5.68]
+y2 = [9.14, 8.14, 8.74, 8.77, 9.26, 8.10, 6.13, 3.10, 9.13, 7.26, 4.74]
+y3 = [7.46, 6.77, 12.74, 7.11, 7.81, 8.84, 6.08, 5.39, 8.15, 6.42, 5.73]
+
+x4 = [8, 8, 8, 8, 8, 8, 8, 19, 8, 8, 8]
+y4 = [6.58, 5.76, 7.71, 8.84, 8.47, 7.04, 5.25, 12.50, 5.56, 7.91, 6.89]
+
+# Calcular desvio padrão de x e x4
+
+print('Media x:', np.std(x))
+print('Media x4:', np.std(x4))
+
+# Calcular média de x e x4
+print('Media x:', np.mean(x))
+print('Media x4:', np.mean(x4))
+
+#Repare que tanto a média quanto o desvio padrão são iguais, mas ao vermos os vetores, sabemos que são bem diferentes
+
+# Calcular média de cada y
+# Dica de agilidade, clicar e segurar antes de fechar o parênteses da 1ª linha, aperte a tecla alt+shift, conseguimos movimentar o cursor para baixo
+print('Media y1:', np.mean(y1))
+print('Media y2:', np.mean(y2))
+print('Media y3:', np.mean(y3))
+print('Media y4:', np.mean(y4))
+
+# Calcular desvio padrão de cada y
+print('Desvio Padrão y1:', np.std(y1))
+print('Desvio Padrão y2:', np.std(y2))
+print('Desvio Padrão y3:', np.std(y3))
+print('Desvio Padrão y4:', np.std(y4))
+
