@@ -1,0 +1,129 @@
+# Bibliotecas para criação de gráficos e visualizações de dados em geral.
+
+# É convenção importar Matplotlib com o codinome 'plt' e Seaborn com o codinome 'sns' (2 bibliotecas mais utilizadas)
+
+# Em geral, apenas 'pyplot' é importado da biblioteca Matplotlib (matplotlib.pyplot)
+
+# pyplot é subbliblioteca dentro do pacote matplotlib
+
+# Análise exploratória de dados = EDA (principal ferramenta) (é auxiliada pela visualização de dados)
+
+# KDD = Extrair algum conhecimento de alguma base de dados usando técnicas de machine learning
+
+# Dados faltantes, outliers
+
+
+### COMPREENDENDO ALGUNS CONCEITOS BÁSICOS DE MATPLOTLIB
+# Figura (preciso avisar a configuração dessa figura)
+# Axes: vertical e horizontal (posso ter vários axis dentro de uma figura)
+# Eixo Y (axis-y) e Eixo X (axis-x) : tenho rótulos dos eixos
+
+
+# Importar matplotlib.pyplot (plt)
+
+import matplotlib.pyplot as plt
+
+# Importar seaborn (sns)
+
+import seaborn as sns
+
+# Gerar eixos x e y
+x = np.linspace(0,51,100)
+y = x**2
+plt.plot(x, y)
+
+# Adicionar títulos aos eixos x e y
+# Eixo x: 'Velocidade (km/h)'
+# Eixo y: 'Distância Percorrida (km)'
+x = np.linspace(0,50,100)
+y = x**2
+plt.plot(x, y);
+plt.xlabel('Velocidade (km/h')
+plt.ylabel('Distância Percorrida (km)')
+
+
+# Adicionar título ao gráfico acima
+x = np.linspace(0,50,100)
+y = x**2
+x = np.linspace(0,50,100)
+y = x**2
+plt.plot(x, y);
+plt.xlabel('Velocidade (km/h')
+plt.ylabel('Distância Percorrida (km)')
+plt.title('Relação entre velocidade e distância percorrida')
+
+# Se quiser adicionar um 'grid' para facilitar a visualização dos valores
+x = np.linspace(0,50,100)
+y = x**2
+x = np.linspace(0,50,100)
+y = x**2
+x = np.linspace(0,50,100)
+y = x**2
+plt.plot(x, y);
+plt.xlabel('Velocidade (km/h')
+plt.ylabel('Distância Percorrida (km)')
+plt.title('Relação entre velocidade e distância percorrida')
+plt.grid(True)
+
+# Construir no mesmo gráfico duas linhas:
+# y: função quadrática  ==> x**2
+# z: função cúbica      ==> x**3 - 5*x**2
+x = np.linspace(0,10,100)  
+y = x**2
+z = x**3 - 5*x**2
+
+plt.plot(x, y)
+plt.plot(x,z)
+plt.xlabel('Eixo x')
+plt.ylabel('Eixo y')
+plt.title('Função quadrática e cúbica')
+plt.grid(True)
+
+# Alterar as cores das linhas do gráfico acima
+# y: verde
+# z: vermelha
+x = np.linspace(0,10,100)  
+y = x**2
+z = x**3 - 5*x**2
+
+plt.plot(x, y, color= 'green')
+plt.plot(x,z, color = 'purple')
+plt.xlabel('Eixo x')
+plt.ylabel('Eixo y')
+plt.title('Função quadrática e cúbica')
+plt.grid(True)
+
+# Para alterar os estilos das linhas do gráfico acima: ls = '-', '--', '-.', ':'
+x = np.linspace(0,10,100)  
+y = x**2
+z = x**3 - 5*x**2
+
+plt.plot(x, y, color ='purple', ls = '-')
+plt.plot(x,z, color = 'orange', ls ='--')
+### ls é line style
+plt.xlabel('Eixo x')
+plt.ylabel('Eixo y')
+plt.title('Função quadrática e cúbica')
+plt.grid(True)
+
+# Incluir legendas nos gráficos acima: label = legenda entre aspas
+# Ao final, incluir comando plt.legend()
+x = np.linspace(0,10,100)  
+y = x**2
+z = x**3 - 5*x**2
+
+plt.plot(x, y, color ='purple', ls = '-', label= 'Quadrática')
+plt.plot(x,z, color = 'orange', ls ='--', label = 'Cúbica')
+### ls é line style
+plt.xlabel('Eixo x')
+plt.ylabel('Eixo y')
+plt.title('Função quadrática e cúbica')
+plt.grid(True)
+## para colocar a legenda, acrescentar o forçamento para a legenda aparecer
+plt.legend
+
+
+
+
+
+
