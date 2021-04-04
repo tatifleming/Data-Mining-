@@ -1,0 +1,77 @@
+#Vamos usar numpy.polyfit(x,y,deg=1)
+#Esse tipo de regressão faz o ajuste de curvas aos pontos
+#deg = 1 ==> Reta
+#deg = 2 ==> Parábola (a gente não vai fazer)
+#deg = 3 ==> Cúbica etc
+
+# Reta 1 (x,y1): a1 * x + b1
+
+a1, b1 = np.polyfit(x, y1,deg=1)
+
+# Fazer uma regressão linear para cada grupo, por exemplo
+# Quando rodo, ele me traz os parâmetros
+#polyfit do numpy
+
+x1_fit = np.array(x)
+y1_fit = a1*x1_fit + b1
+
+plt.plot(x1_fit, y1_fit,'r-', lw=2);
+plt.scatter(x,y1,color='blue');
+
+# Para o CEIS, pensei em fazer na 3ª camada essa reta, onde x seriam os grupos de renda por investimento e y seria taxa de GINI
+
+# Reta 2 (x,y2): a2 * x + b2
+
+a2, b2 = np.polyfit(x, y2, deg=1) 
+
+x2_fit = np.array(x)
+y2_fit = a2*x2_fit + b2
+
+plt.plot(x2_fit, y2_fit,'r-', lw=2);
+plt.scatter(x,y2,color='green');
+
+# O parâmetro 'r-' siginifica red + linha cheia
+
+#A combinação y2 é diferente que y1 e não fica bom fazer ajuste por uma reta
+
+# Reta 3 (x,y3): a3 * x + b3
+
+a3, b3 = np.polyfit(x, y3, deg =1)
+
+x3_fit = np.array(x)
+y3_fit = a3*x3_fit + b3
+
+plt.plot(x3_fit, y3_fit,'r-', lw=2);
+plt.scatter(x,y3,color='blue');
+
+# Reta 4 (x4,y4): a4 * x4 + b4
+
+a4, b4 = np.polyfit(x, y4, deg =1)
+
+x4_fit = np.array(x4)
+y4_fit = a4*x4_fit + b4
+
+plt.plot(x4_fit, y4_fit,'c-', lw=2);
+plt.scatter(x4,y4,color='blue');
+
+####Gráficos (todos juntos)
+
+fig, axs = plt.subplots(2,2, sharex=True, sharey=True, figsize=(8,8));
+axs[0, 0].set(xlim=(0, 20), ylim=(2, 14));
+axs[0, 0].set(xticks=(0, 10, 20), yticks=(4, 8, 12));
+
+axs[0, 0].plot(x1_fit, y1_fit,'r-', lw=2);
+axs[0, 0].scatter(x, y1);
+
+axs[0, 1].plot(x2_fit, y2_fit,'r-', lw=2);
+axs[0, 1].scatter(x, y2);
+
+axs[1, 0].plot(x3_fit, y3_fit,'r-', lw=2);
+axs[1, 0].scatter(x, y3);
+
+axs[1, 1].plot(x4_fit, y4_fit,'r-', lw=2);
+axs[1, 1].scatter(x4, y4);
+
+#Quando quero que todos os meus axis tenham valor de x e y, usamos os comandos acima sharex e sharey acima
+
+
