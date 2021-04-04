@@ -1,0 +1,30 @@
+#Conceitos de discretização de dados numéricos: mínimo do mínimo; máximo do mínimo; mínimo do máximo; máximo do máximo
+# Tipos de discretização (MEDIDA EM BINS): Equal Width (larguras iguais), Equal Height or Equal Frequency (tenta distribuir igualmente para cada bin) 
+#EW: pega o maior valor e o menor e divide em bins; frequência em cada intervalo
+#EH: ordena primeiro o que quero em cada bin para tentar fazer a distribuição o máximo homogênea possível 
+#No EH, os intervalos é que mudam (tenta encontrar os cortes para encontrar o máx de registros possíveis)
+# Para discretização com Larguras iguais
+# Discretizar a variável 'petal_length' em 5 bins, com intervalos contendo larguras iguais
+#Para o CEIS, podemos fazer BINS no InvestimentoPIB
+#BOXPLOT também trabalha com as medianas
+
+
+PL_disc_EqW = pd.cut(df.petal_length, bins=5)
+
+PL_disc_EqW.value_counts()
+
+# Apresentar os intervalos e quantos registros foram alocados em cada um
+
+PL_disc_EqW.value_counts()
+
+#Se quiser colocar na ordem ao invés de ser pela ordem de frequência
+# O default é True
+
+PL_disc_EqW.value_counts(sort = False)
+
+# Para discretização com Alturas iguais
+# Comando pd.cut(serie_x, bins=n_bins)
+PL_disc_EqH = pd.qcut(df.petal_length, q=5)
+
+# Apresentar os intervalos e quantos registros foram alocados em cada um
+PL_disc_EqH.value_counts()
