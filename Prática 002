@@ -1,0 +1,37 @@
+# Exercício 1
+
+TminA = dfA['Tmin']
+TminA.head()
+
+TminB = dfB['Tmin']
+TminB.head()
+
+TminC = dfC['Tmin']
+TminC.head()
+
+TminA.mean()
+
+TminB.mean()
+
+TminC.mean()
+
+TmaxA = dfA['Tmax']
+TmaxA.head()
+
+TmaxB = dfB['Tmax']
+TmaxB.head()
+
+TmaxC = dfC['Tmax']
+TmaxC.head()
+
+TmaxA.mean()
+
+TmaxB.mean()
+
+TmaxC.mean()
+
+Análise crítica: 
+A cidade A tem a média mínima de 18 graus, média máxima de 30
+A cidade B tem média mínima de 16 e máxima de 27
+A cidade C tem média mínima de 9 e máxima de 21
+A taxa de variação média mínimo-máximo entre A e C é de 12 graus, enquanto em B é de 11 
