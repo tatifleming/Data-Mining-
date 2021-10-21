@@ -1,0 +1,2282 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Cópia de Tatiana_Vasconcelos_235512 (1).ipynb",
+      "private_outputs": true,
+      "provenance": [],
+      "collapsed_sections": [],
+      "machine_shape": "hm",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    },
+    "accelerator": "TPU"
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/tatifleming/Data-Mining-/blob/main/under_construction_grey\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "5zo-fmSJXIzc"
+      },
+      "source": [
+        "gpu_info = !nvidia-smi\n",
+        "gpu_info = '\\n'.join(gpu_info)\n",
+        "if gpu_info.find('failed') >= 0:\n",
+        "  print('Select the Runtime > \"Change runtime type\" menu to enable a GPU accelerator, ')\n",
+        "  print('and then re-execute this cell.')\n",
+        "else:\n",
+        "  print(gpu_info)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "TR7pUkbA63xM"
+      },
+      "source": [
+        "from psutil import virtual_memory\n",
+        "ram_gb = virtual_memory().total / 1e9\n",
+        "print('Your runtime has {:.1f} gigabytes of available RAM\\n'.format(ram_gb))\n",
+        "\n",
+        "if ram_gb < 20:\n",
+        "  print('Not using a high-RAM runtime')\n",
+        "else:\n",
+        "  print('You are using a high-RAM runtime!')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "8v6BVclheucb"
+      },
+      "source": [
+        "from google.colab import drive\n",
+        "drive.mount('/content/drive')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "i6BBUZ-CiyA8"
+      },
+      "source": [
+        "import pandas as pd\n",
+        "import numpy as np\n",
+        "import matplotlib.pyplot as plt\n",
+        "import seaborn as sns\n",
+        "from sklearn import datasets\n",
+        "% matplotlib inline"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "PvIMyVxzvEfj"
+      },
+      "source": [
+        "# 201\n",
+        "import zipfile\n",
+        "zf1 = zipfile.ZipFile('/content/drive/MyDrive/PATSTAT/tls201_part01[1].zip') \n",
+        "df1 = pd.read_csv(zf1.open('tls201_part01.csv'))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "8wZ1uwduvawS"
+      },
+      "source": [
+        "import zipfile\n",
+        "zf2 = zipfile.ZipFile('/content/drive/MyDrive/PATSTAT/tls201_part02[2].zip') \n",
+        "df2 = pd.read_csv(zf2.open('tls201_part02.csv'))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "z_KV1oBrvvIS"
+      },
+      "source": [
+        "import zipfile\n",
+        "zf3 = zipfile.ZipFile('/content/drive/MyDrive/PATSTAT/tls201_part03[1].zip') \n",
+        "df3 = pd.read_csv(zf3.open('tls201_part03.csv'))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "hFkFVXm7EqvA"
+      },
+      "source": [
+        "df_201p = pd.concat([df1, df2, df3])"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "f45QZxpKzUln"
+      },
+      "source": [
+        "df_201 = df_201p.drop(['appln_nr', 'appln_filing_date', 'appln_nr_epodoc', 'appln_nr_original', 'ipr_type', 'internat_appln_id', 'int_phase', 'reg_phase', 'nat_phase', 'earliest_filing_year', 'earliest_filing_date', 'earliest_filing_id', 'earliest_publn_date', 'earliest_publn_year', 'earliest_pat_publn_id', 'granted', 'docdb_family_id', 'inpadoc_family_id', 'docdb_family_size', 'nb_citing_docdb_fam'], axis=1)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "QMdoLe39Cb92"
+      },
+      "source": [
+        "#209\n",
+        "import zipfile\n",
+        "zf4 = zipfile.ZipFile('/content/drive/MyDrive/PATSTAT/tls209_part01[1].zip') \n",
+        "df4 = pd.read_csv(zf4.open('tls209_part01.csv'))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "3SPVt3YyClih"
+      },
+      "source": [
+        "zf5 = zipfile.ZipFile('/content/drive/MyDrive/PATSTAT/tls209_part02[1].zip') \n",
+        "df5 = pd.read_csv(zf5.open('tls209_part02.csv'))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Hxw7wfK6w_Mf"
+      },
+      "source": [
+        "df_209 = pd.concat([df4, df5])"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "63in6nUfyEp-"
+      },
+      "source": [
+        "#completa lista CEIS. Fonte: Fiocruz\n",
+        "\n",
+        "IPC_CEIS_list = ['F21H','F21K','F21L','F21S','F21V','F21W','F21Y','G05F','H01B','H01B','H01C','H01F','H01G','H01H','H01J','H01K','H01M',\n",
+        "                 'H01R','H01T','H02B','H02G','H02H','H02J','H02K','H02M','H02N','H02P','H02S','H05B','H05C','H05F','H05K','G09F','G09G',\n",
+        "                 'G11B','H03F','H03G','H03J','H04N   3','H04N   5', 'H04N   9','H04N  13','H04N  15','H04N  17','H04R','H04S','G08C','H01P',\n",
+        "                 'H01Q','H03B','H03C','H03D','H03H','H03K','H03L','H03M','H04B','H04H','H04J','H04K','H04L','H04M','H04N   1','H04N   7','H04N  11',\n",
+        "                 'H04Q','G06C','G06D','G06E','G06F','G06G','G06J','G06K','G06M','G06N','G06Q','G06T','G11C','G10L','H01L','B81B','B81C','G02B','G02C',\n",
+        "                 'G02F','G03B','G03C','G03D','G03F','G03G','G03H','H01S','G01B','G01C','G01D','G01F','G01G','G01H','G01J','G01K','G01L','G01M','G01N   1',\n",
+        "                 'G01N   3','G01N   5','G01N   7','G01N   9','G01N  11','G01N  13','G01N  15','G01N  17','G01N  19','G01N  21','G01N  22','G01N  23',\n",
+        "                 'G01N  24','G01N  25','G01N  27','G01N  29','G01N  30','G01N  31','G01N  33','G01N  35','G01N  37','G01P','G01R',\n",
+        "                 'G01S','G01V','G01W','G04B','G04C','G04D','G04F','G04G','G04R','G05B', 'G05D','G07B','G07C','G07D','G07F','G07G','G08B',\n",
+        "                 'G08G','G09B','G09C','G09D','G12B','A61B','A61C','A61D','A61F','A61G','A61H','A61J','A61L','A61M','A61N','G01T','G21B','G21C','G21D',\n",
+        "                 'G21F','G21G','G21H','G21J','G21K','H05G','H05H','C07C','C07D','C07F','C07H','C07H','C07J','C07K','C08B','C08F','C08G','C08H','C08K',\n",
+        "                 'C08L','C09D','C09J','A61K','A61P','C07G','C12M','C12N','C12P','C12Q','C12R','C12S','A01H','A21D','A23B','A23C','A23D','A23F','A23G',\n",
+        "                 'A23J','A23K','A23L','C12C','C12F','C12G','C12H','C12J','C13D','C13F','C13J','C13K','A01N','C05C','C05D','C05F','C05G','C07B','C08C',\n",
+        "                 'C09B','C09C','C09F','C09G','C09H','C09K','C10B','C10C','C10F','C10G','C10H','C10J','C10K','C10L','C10M','C10N','C11B','C11C','C11D',\n",
+        "                 'B05C','B05D','B32B','C23C','C23D','C23F','C23G','C25B','C25C','C25D','C25F','C30B','C01B','C01C','C01D','C01F','C01G','C03C','C04B',\n",
+        "                 'C21B','C21C','C21D','C22B','C22C','C22F','B22C','B22D','B22F','B82B','B82Y','B01B','B01D','B01F','B01J','B01L','B02C','B03B','B03C','B03D',\n",
+        "                 'B04B','B04C','B05B','B06B','B07B','B07C','B08B','F25J','F26B','A41H','A43D','A46D','B28B','B28C','B28D','B29B','B29C','B29D','B29K','B29L',\n",
+        "                 'B31B','B31C','B31D','B31F', 'C03B','C08J','C14B','C14C','D01B','D01C','D01D','D01F','D01G','D01H','D02G','D02H','D02J','D03C','D03D','D03J',\n",
+        "                 'D04B','D04C','D04G','D04H','D05B','D05C','D06B','D06C','D06G','D06H','D06J','D06L','D06M','D06P','D06Q','D21B','D21C','D21D','D21F','D21G',\n",
+        "                 'D21H','D21J','B25J','B41B','B41C','B41D','B41F','B41G','B41J','B41K','B41L','B41M','B41N','B65B','B65C','B65D','B65F','B65G','B65H','B66B','B66C','B66D',\n",
+        "                 'B66F','B67B','B67C','B67D','A01B','A01C','A01D','A01F','A01G','A01J','A01K','A01L','A01M','A21B','A21C','A22B','A22C','A23N','A23P','B02B','C12L','C13C',\n",
+        "                 'C13G','C13H','A62D','B01D','B09B','B09C','C02F','F01N', 'F23G','F23J','B21B','B21C','B21D','B21F','B21G','B21H','B21J','B21K','B21L','B23B','B23C','B23D','B23F',\n",
+        "                 'B23G','B23H','B23K','B23P','B23Q','B24B','B24C','B24D','B26D','B26F','B27B','B27C','B27D','B27F','B27G','B27H','B27J','B27K','B27L','B27M',\n",
+        "                 'B27N','B30B','F01B','F01C','F01D','F01K','F01L','F01M','F01P','F02B','F02C','F02D','F02F','F02G','F02K','F02M','F02N','F02P','F03B','F03C',\n",
+        "                 'F03D','F03G','F03H','F04B','F04C','F04D','F04F','F23R','F22B','F22D','F22G','F23B','F23C','F23D','F23H','F23H','F23K','F23L','F23M','F23N','F23Q',\n",
+        "                 'F24B','F24C','F24D','F24F','F24H','F24J','F24S','F24T','F24V','F25B','F25C','F27B','F27D','F28B','F28C','F28D','F28F','F28G','F15B',\n",
+        "                 'F15C','F15D','F16B','F16C','F16D','F16F','F16G','F16H','F16J','F16K','F16L','F16M','F16N','F16P','F16S','F16T','F17B','F17C','F17D','G05G',\n",
+        "                 'B60B','B60C','B60D','B60F','B60G','B60H','B60J','B60K','B60L','B60M','B60N','B60P','B60Q','B60R','B60S','B60T','B60V','B60W','B61B','B61C','B61D','B61F','B61G','B61H',\n",
+        "                 'B61J','B61K','B61L','B62B','B62C','B62D','B62H','B62J','B62K','B62L','B62M','B63B','B63C','B63H','B63J','B64B','B64C','B64D','B64F',\n",
+        "                 'B63G','B64G','C06B','C06C','C06D','C06F','F41A','F41B','F41C','F41F','F41G','F41H','F41J','F42B','F42C','F42D']\n",
+        "\n",
+        "                 \n",
+        "df_CEIS = df_209[df_209['ipc_class_symbol'].isin(IPC_CEIS_list)]\n",
+        "print(df_CEIS)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ZTNEg64OWaAP"
+      },
+      "source": [
+        "# Apenas com subclasses corretas (CEIS). Fonte: Fiocruz\n",
+        "#IPC_CEIS_list = ['G05F','H01B','H01B','H01C','H01F','H01G','H01H','H01J','H01K','H01M','H01R','H01T','H05B','H05C','H05F','H05K','G09F',\n",
+        "#                 'G09G','G11B','H03F','H03G','H03J','H04N   3','H04N   5', 'H04N   9','H04N  13','H04N  15','H04N  17','H04R','H04S','G08C',\n",
+        "#                 'H01P','H01Q','H03B','H03C','H03D','H03H','H03K','H03L','H03M','H04B','H04H','H04J','H04K','H04L','H04M','H04N   1','H04N   7',\n",
+        "#                 'H04N  11','H04Q', 'G11C','G10L','H01L', 'G03B','G03C','G03D','G03F','G03G','G03H','H01S','G01B','G01C','G01D','G01F','G01G','G01H',\n",
+        "#                 'G01J','G01K','G01L','G01M', 'G01P','G01R','G01S','G01V','G01W', 'G08B','G08G','G09B','G09C','G09D', 'A61B','A61C','A61D','A61F','A61G',\n",
+        "#                 'A61H','A61J','A61L','A61M','A61N','G01T', 'H05G','H05H','C07C','C07D','C07F','C07H','C07H','C07J','C07K','C08B','C08F','C08G','C08H',\n",
+        "#                 'C08K','C08L','C09D','C09J','A61K','A61P','C07G','C12M','C12N','C12P','C12Q','C12R','C12S','A01H','A21D','A23B','A23C','A23D','A23F',\n",
+        "#                 'A23G','A23J','A23K','A23L','C12C','C12F','C12G','C12H','C12J','C13D','C13F','C13J','C13K','A01N', 'C07B','C08C','C09B','C09C',\n",
+        "#                 'C09F','C09G','C09H','C09K','C10B','C10C','C10F','C10G','C10H','C10J','C10K','C10L','C10M','C10N','C11B','C11C','C11D','B05C','B05D',\n",
+        "#                 'C03C', 'B01B','B01D','B01F','B01J','B01L', 'B02C', 'B05B', 'F25J', 'A41H','A43D','A46D', 'C03B','C08J', 'D04B','D04C','D04G','D04H', \n",
+        "#                 'D05C','D06B','D06C','D06G','D06H','D06J','D06L','D06M','D06P','D06Q', 'B25J', 'B65B','B65C','B65D','B65F','B65G','B65H', 'A01B',\n",
+        "#                 'A01C','A01D','A01F','A01G','A01J','A01K','A01L','A01M','A21B','A21C', 'A23N','A23P','B02B','C12L','C13C','C13G','C13H','A62D','B01D',\n",
+        "#                 'F01N', 'F23G','F23J', 'B26D','B26F', 'F01B','F01C','F01D','F01K','F01L','F01M','F01P', 'F23R', 'F23B','F23C','F23D','F23H','F23H','F23K',\n",
+        "#                 'F23L','F23M','F23N','F23Q', 'F25B', 'F25C', 'G05G', 'B63B','B63C','B63H','B63J','B64B','B64C','B64D','B64F','B63G','B64G']\n",
+        "\n",
+        "                 \n",
+        "#df_CEIS = df_209[df_209['ipc_class_symbol'].isin(IPC_CEIS_list)]\n",
+        "#print(df_CEIS)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "GBc0EGhwWYt3"
+      },
+      "source": [
+        "# Referência: Site WIPO\n",
+        "\n",
+        "CPC_IA_list = ['G06N7/02', 'G05B13/0275', 'G10H2250/151', 'B60G2600/1879', 'F05B2270/707', 'F16H2061/0081', 'G05B13/028',\n",
+        "'G06F11/2257', 'G10K2210/3024', 'G16H50/20', 'G06N3/086', 'G06N3/004', 'G06N3/02', 'G06N3/08', 'G06N99/005',\n",
+        "'G06K9/00', 'G06T2207/20081', 'G06N3/082', 'G06N3/084', 'G06N7/046', 'G06T3/4046', 'G06T9/002', 'G06T2207/20084',\n",
+        "'G05B13/027', 'G10L15/16', 'G01N2201/1296', 'G01N29/4481', 'G01S7/417', 'G06F11/1476', 'G06F11/2263', 'G06F2207/4824',\n",
+        "'G11B20/10518', 'G10H2250/311', 'G10K2210/3038', 'H02P21/0014', 'H02P23/0018', 'H03H2017/0208', 'H03H2222/04', 'B60G2600/1878',\n",
+        "'B23K31/006', 'B29C2945/76979', 'B29C66/965', 'F02D41/1405', 'F05B2270/709', 'F16H2061/0084', 'G06N7/005', 'G06N5/02',\n",
+        "'G06N3/088','G06T7/00', 'G06T1/20', 'G02B27/01', 'G06T19/006', 'G06F3/011', 'G05B2219/32014', 'G06K9/00006', 'G06K9/00221',\n",
+        "'G06K2009/00395', 'G06K9/00375', 'G06K9/00597', 'G06K9/00885', 'G06K9/00362', 'G06K9/00335', 'G06K9/00402', 'G06K9/00442',\n",
+        "'G06K2209/01', 'G06K9/00852', 'G06T7/10', 'G06T7/215', 'H04N5/147', 'G06K9/34', 'H04N1/40062', 'G06F3/012', 'G06K2017/0045',\n",
+        "'G06T7/246', 'G08B13/2402', 'G06K9/00624', 'G06T1/0014', 'G06K9/00798', 'G05B13/0265', 'G05B13/0285', 'G05B13/029', \n",
+        "'G05B13/0295', 'G05B2219/33002', 'G05D1/0088', 'G06N5/00', 'G06F17/279', 'G06F17/2765', 'G06F17/2705', 'G06F17/28',\n",
+        "'G06F17/30669', 'G06F17/2755', 'G06F17/2881', 'G06F17/2282', 'G06F17/27', 'G06F17/30401', 'G06F17/3043','G06F17/30654',\n",
+        "'G06F17/30663','G06F17/30666', 'G06F17/30731', 'G06F17/2785', 'G10L17/00', 'G10L25/00', 'G10L99/00', 'G06F17/30784',\n",
+        "'G10L15/00', 'G10L13/00', 'H01J2237/30427', 'H01M8/04992', 'H02H1/0092', 'A63F13/67', 'A63F2300/00', 'G06F19/24','A61B5/7264',\n",
+        "'B01J2219/00608', 'C12','G01N2500/00','C40B','C12N2710/00','G06T7/0012','G06T2207/30004','G06T2207/10116','G06F19/321',\n",
+        "'G16H','G06F19/30','A61N2007/0021','A23V2002/00','G09B19/0092','G06F19/3475','A23L33/40','A61B5','G06F19/707','H04L63/14',\n",
+        "'G06Q30/0225', 'G06Q30/0248', 'G06Q20/4016','G06Q40/025','H04M15/47','H04M2215/0148','G06K9/6284','G06F21/577','G08B13/196',\n",
+        "'G06K9/00771','G07F19/207','G08B25/14','H04K3/82','G08B31/00','B60R25/104','G07C9/00142','H04L63/083','H04L63/0815','H04L63/08',\n",
+        "'G06Q20/40','G06F21/30', 'H04W12/06','G06F2221/2119','B60R25/25','H04L9/00','H04L2209/56','H04L2209/125','G06F21/602',\n",
+        "'G06F2221/2107', 'H04L2012/5687', 'H04L63/16','G06F21/10','G06F21/50','G06F21/70','H04L63/10','H04L63/20','H04L63/02',\n",
+        "'H04L63/18','H04L63/30','G05B2219/31246','G06F21/6245','H04M3/42008','H04L29/12433','G06F21/6254','G06Q50/265','H04L63/0421',\n",
+        "'H04L63/0407','H04L2209/42','H04L2012/5686','H04L2025/03464','H04L25/0254','H04L25/03165','H04L41/16','H04L45/08','H04N21/4662',\n",
+        "'H04Q2213/054','H04Q2213/13343','H04Q2213/343','H04R25/507','G06F13/00','H04L29/12','H04L41/00','H04L43/00','H04L45/00',\n",
+        "'H04L47/00','H04L49/00','H04L51/00','H04L61/00','H04L63/00','H04L65/00','H04L67/00','H04L69/00','H04H','H04N','H04M','H04N7/15',\n",
+        "'H04N7/144','H04L29/06027','H04L65/4038','H04M3/56','H04M1/2535','H04M7/006','H04M2215/202','H04L61/1529',\n",
+        "'B60W30/06','B60W30/10','B60W30/12','B60W30/14','B60G2600/1876','B62D15/0285','B64G2001/247','G06T2207/30248','G06T2207/30236',\n",
+        "'G06K9/00791','G05D1/00','B64C2201','B64','F02K','G05D1/0038','B64C39/024','B60L2260/32','G06K9/00845','B60W2040/0809',\n",
+        "'G06K2209/15','G07C9/00087','B60L15/38','G08G','A61B5/7267','B25J9/161','E21B2041/0028','F03D7/046',\n",
+        "'F05D2270/709','G01N33/0034','G01R31/2846','G01R31/3651','G06F15/18','G06F17/16','G06F17/30029','G06F17/30247',\n",
+        "'G06F17/30522','G06F17/30672','G06F17/30684','G06F17/30687','G06F17/3069','G06F17/30702','G06F17/30705','G06F17/30743',\n",
+        "'G06K7/1482','G06N3/00','G06N5/003','G08B29/186','G10L25/30','H04L2025/03554','H04N21/4666','Y10S128/924','Y10S128/925',\n",
+        "'Y10S706/00','G06F17/14','G06F17/153','G10H2250/005','G06F17/30','G06F17/50','G06Q','G06Q30/02']\n",
+        "\n",
+        "df_224 = df6[df6['cpc_class_symbol'].isin(CPC_AI_list)]\n",
+        "print(df_224)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "2LzkCIK6wSXA"
+      },
+      "source": [
+        "df_um = pd.merge(df_CEIS, df_224, how = 'left', on = 'ipc_class_symbol')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "p-H_p3P-XOF7"
+      },
+      "source": [
+        "df_dois = pd.merge(df_um, df_201, how = 'inner', on = 'appln_id')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "zbja3ofqyIAR"
+      },
+      "source": [
+        "df_dois.head()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dNtKncHmYeeO"
+      },
+      "source": [
+        "# 229\n",
+        "import pandas as pd\n",
+        "import zipfile\n",
+        "zf7 = zipfile.ZipFile('/content/drive/MyDrive/PATSTAT/tls229_part01[1].zip') \n",
+        "df7 = pd.read_csv(zf7.open('tls229_part01.csv'))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ecLJJW16yCbf"
+      },
+      "source": [
+        "df_tres = pd.merge(df_dois, df7, how = 'inner', on = 'appln_id')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "i1PHxXtvyKQN"
+      },
+      "source": [
+        "df_tres.head()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ISsjnulxzNVl"
+      },
+      "source": [
+        "#207\n",
+        "import zipfile\n",
+        "zf8 = zipfile.ZipFile('/content/drive/MyDrive/PATSTAT/tls207_part01[1].zip') \n",
+        "df8 = pd.read_csv(zf8.open('tls207_part01.csv'))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "C8GWSRjj6i3F"
+      },
+      "source": [
+        "#206\n",
+        "import zipfile\n",
+        "zf9 = zipfile.ZipFile('/content/drive/MyDrive/PATSTAT/tls206_part01[1].zip') \n",
+        "df9 = pd.read_csv(zf9.open('tls206_part01.csv'))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "2rHsjag16uVo"
+      },
+      "source": [
+        "import zipfile\n",
+        "zf10 = zipfile.ZipFile('/content/drive/MyDrive/PATSTAT/tls206_part02[1].zip') \n",
+        "df10 = pd.read_csv(zf10.open('tls206_part02.csv'))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "AAprH_e57j1S"
+      },
+      "source": [
+        "# Juntando as planilhas 206\n",
+        "df_206 = pd.concat([df9, df10])"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "7E8epzxe7rf1"
+      },
+      "source": [
+        "# merge da 207 com 206\n",
+        "df_207p = pd.merge(df_206, df8, how = 'inner', on = 'person_id')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "C_aWqbAz8dEe"
+      },
+      "source": [
+        "# excluido atributos que não vamos trabalhar\n",
+        "df_207 = df_207p.drop(['person_name_orig_lg', 'person_address', 'nuts', 'nuts_level', 'doc_std_name', 'psn_id', 'psn_name', 'psn_level', 'han_id', 'han_name', 'han_harmonized'], axis=1)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Lc4PgnVQ-hsX"
+      },
+      "source": [
+        "# Juntando df\n",
+        "df_quatro = pd.merge(df_tres, df_207, how = 'inner', on = 'person_id')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "H_UxIKPkEfJb"
+      },
+      "source": [
+        "#230\n",
+        "zf11 = zipfile.ZipFile('/content/drive/MyDrive/PATSTAT/tls230_part01[1].zip') \n",
+        "df11 = pd.read_csv(zf11.open('tls230_part01.csv'))"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "pWrfl0CBFJzt"
+      },
+      "source": [
+        "df_PATSTAT = pd.merge(df_quatro, df11, how = 'inner', on = 'appln_id')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1Vk5DmMuFjUW"
+      },
+      "source": [
+        "df_PATSTAT.head()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "24po-4B4nJQI"
+      },
+      "source": [
+        "## IMPORTANDO OS DADOS CAIXA PRETA \n",
+        "# missing: dados de publicações\n",
+        "# missing: dados de fusões e aquisições\n",
+        "df12 = pd.read_csv('100_nation_target.csv') \n",
+        "df13 = pd.read_csv('101_nation_buyer.csv') \n",
+        "df14 = pd.read('102_equipment_sector.csv') \n",
+        "df15 = pd.read('103_ctry_specialization_profile.csv')\n",
+        "df16 = pd.read('105_pol_drug_trips.csv') \n",
+        "df17 = pd.read('104_categories_provisions_flex.csv') \n",
+        "# artigos em IA/país"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "nXB22GfwKf-d"
+      },
+      "source": [
+        "m1 = pd.merge(df_PATSTAT, df12, how = 'inner', on = 'appln_auth')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ztkQUhQyKzym"
+      },
+      "source": [
+        "m2 = pd.merge(m1, df13, how = 'inner', on = 'appln_auth')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "jDHZ9FUrK9Gy"
+      },
+      "source": [
+        "m3 = pd.merge(m2, df14, how = 'inner', on = 'appln_filing_year')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Pjn-6dj0LB2s"
+      },
+      "source": [
+        "m4 = pd.merge(m3, df15, how = 'inner', on = 'appln_auth')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "5khZwHp8eRVH"
+      },
+      "source": [
+        "m5 = pd.merge(m4, df16, how = 'inner', on = 'appln_auth')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "uM_9m_fgEEt8"
+      },
+      "source": [
+        "grouped = df17.appln_filing_year.groupby([df17.auth_trips, df17.wto_classification]).mean()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "HGDKVRaSEhEl"
+      },
+      "source": [
+        "grouped.head()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "-8Fkb4NUEizM"
+      },
+      "source": [
+        "df = pd.merge(m5, grouped, how = 'inner', on = 'appln_filing_year')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1bcggfXUMWBY"
+      },
+      "source": [
+        "df.describe()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "HbgLz4AUMaYe"
+      },
+      "source": [
+        "# Verificar missing\n",
+        "df.isnull().sum()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "a6RhU_6KMfDr"
+      },
+      "source": [
+        "# para saber qual tipo de variável \n",
+        "df.dtypes"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "tZwZGvf9Mi8n"
+      },
+      "source": [
+        "# eliminando uma coluna \"unnamed\"\n",
+        "df = df.loc[:, ~df.columns.str.contains('^Unnamed')]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "vQNI5cvqM_4T"
+      },
+      "source": [
+        "# identificar os 3 setores com maior número de registros\n",
+        "df['NACE2_CODE'].value_counts()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "hukVGi_YNP3g"
+      },
+      "source": [
+        "# identificar as 3 patentes com maior número de registros\n",
+        "df['ipc_class_symbol'].value_counts()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "cn4UyPc6fC8i"
+      },
+      "source": [
+        "df['cpc_class_symbol'].value_counts()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "aBzodM_WNWA6"
+      },
+      "source": [
+        "# identificar os 3 países com maior número de registros\n",
+        "df['appln_auth'].value_counts()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "uAz7MjAdTxkh"
+      },
+      "source": [
+        "df.dtypes"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ifajDC5MTVzY"
+      },
+      "source": [
+        "# Converter int64 para 'object'\n",
+        "#df[['safra','codFaz', 'bloco', 'talhao']] = df[['safra','codFaz', 'bloco', 'talhao']].astype('object')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "F0sH_jZ8TgTL"
+      },
+      "source": [
+        "# Converter object para 1 e, em seguida, converter para integer\n",
+        "#df['estagio']  = df.estagio.replace(['15M','18m','12m'],1).astype('int32')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "KGb7kTl9T1Nd"
+      },
+      "source": [
+        "#df.drop(['codFaz', 'bloco', 'talhao', 'usina'], axis=1, inplace=True)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "scJcwaSYT8Tt"
+      },
+      "source": [
+        "df.info()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "5ZSiESP-UCc9"
+      },
+      "source": [
+        "Exploração de dados"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "cY3dt0xgUGYb"
+      },
+      "source": [
+        "df.appln_auth.groupby(df.psn_sector).mean()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "NCoLH8bugrfF"
+      },
+      "source": [
+        "df.appln_auth.groupby(df.wto_classification).mean()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ajSHirM2hdR7"
+      },
+      "source": [
+        "df.appln_auth.groupby(df.non-working_lc).mean()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "D_zR7oC9iRO1"
+      },
+      "source": [
+        "df.appln_auth.groupby(df.public-interest_lc).mean()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "jhSpzlO0iozc"
+      },
+      "source": [
+        "df.country_TRIPS.groupby(df.wto_classification).mean()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "9SY-h-GAjRnq"
+      },
+      "source": [
+        "df.country_TRIPS.groupby(df.psn_sector).mean()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "n42Um_RYUH-4"
+      },
+      "source": [
+        "# Distribuição da frequência por licença compulsória por país\n",
+        "# Distribuição do CEIS por país\n",
+        "# Distribuição do NACE por país\n",
+        "df.boxplot(column='psn_sector', by='ipc_class_symbol')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Wh_LVDZh9BZ4"
+      },
+      "source": [
+        "plt.hist(df[''], color='red', bins=15)\n",
+        "plt.legend(['Histograma Geral dos erros'])"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "naKize3-9FJV"
+      },
+      "source": [
+        "# Gráficos scatter plot\n",
+        "import seaborn as sns\n",
+        "sns.scatterplot(x = df.tchReal, y = df.tchEst)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mdMTEgqw9IyA"
+      },
+      "source": [
+        "# Gráficos scatter plot por variedade\n",
+        "import seaborn as sns\n",
+        "sns.scatterplot(x = df.tchReal, y = df.tchEst, hue=df.variedade)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "-HLz-sQa9Oyr"
+      },
+      "source": [
+        "# Questão 2.3 B\n",
+        "df[df.tchErro == df.tchErro.max()][[\"tchEst\", \"tchReal\", \"tchErro\"]]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "P4KkKivr9QJ6"
+      },
+      "source": [
+        "df[df.tchErro == df.tchErro.max()][[\"estagio\", \"variedade\"]]"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "SRsjH0JE9gxl"
+      },
+      "source": [
+        "df.tchReal.groupby([df.estagio, df.variedade]).mean()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OT9F6odF9mjt"
+      },
+      "source": [
+        "df.tchReal.groupby([df.estagio, df.variedade]).min()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "vZzaHRN9-P_W"
+      },
+      "source": [
+        "df['tchErro'].groupby(df['estagio']).hist()\n",
+        "plt.legend([1, 2, 3, 4, 5])\n",
+        "plt.title('Histograma por estágio')\n",
+        "plt.show()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "zCZOdoSh8aJO"
+      },
+      "source": [
+        "# Normalizar dados"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ogHtW-wD7YxN"
+      },
+      "source": [
+        "Pré-modelagem\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "jeRQMJju8X63"
+      },
+      "source": [
+        "# Construção de uma função para executar o 'tunning'\n",
+        "\n",
+        "def rnd_hyper_tunning(model, param, niter):\n",
+        "  rnd_search = RandomizedSearchCV(model, \n",
+        "                                  param_distributions=param,\n",
+        "                                  n_iter=niter,\n",
+        "                                  cv=5,\n",
+        "                                  random_state=2021)\n",
+        "  rnd_search.fit(X_train_norm, y_train)\n",
+        "  return rnd_search.best_params_"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "XL-eI-Kj-exl"
+      },
+      "source": [
+        "# Construção de uma função para calcular R2, MAE e RMSE\n",
+        "\n",
+        "def metrics_reg(y_test, y_pred_modelo):\n",
+        "# R2 (Coeficiente de Determinação)\n",
+        "  modelo_r2 = r2_score(y_test, y_pred_modelo)\n",
+        "# MAE (Mean Absolute Error - Erro Absoluto Médio)\n",
+        "  modelo_mae = mean_absolute_error(y_test, y_pred_modelo)\n",
+        "# RMSE (Root Mean Squared Error - Erro Quadrático Médio)\n",
+        "  modelo_rmse = mean_squared_error(y_test, y_pred_modelo, squared=False)\n",
+        "  return modelo_r2, modelo_mae, modelo_rmse"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "i4Rg7r1X-i6z"
+      },
+      "source": [
+        "# Separar atributos preditores(X) do atributo meta (y)\n",
+        "y = df.tchReal\n",
+        "X = df.drop('tchReal', axis=1)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "36ED6mh7-l8c"
+      },
+      "source": [
+        "# Construir conjuntos de Treino e Test na proporção 75/25 (random_state = 2021)\n",
+        "X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.25, random_state = 2021)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "CBTKklZU-oin"
+      },
+      "source": [
+        "# Separar atributos numéricos (X_train_num, X_test_num) e categóricos (X_train_cat, X_test_cat) dos conjuntos de treino e teste\n",
+        "X_train_num = X_train.select_dtypes(include=np.number)\n",
+        "X_train_cat = X_train.select_dtypes(exclude=np.number)\n",
+        "X_test_num = X_test.select_dtypes(include=np.number)\n",
+        "X_test_cat = X_test.select_dtypes(exclude=np.number)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ET-uT5zE-shE"
+      },
+      "source": [
+        "# Normalizar (Z-Score) os atributos preditores numéricos do conjunto de treino (X_train) e aplicar a mesma transformação no conjunto de teste (X_test)\n",
+        "\n",
+        "# Passo 1: Definir o 'scaler' no X_train_num\n",
+        "scaler = StandardScaler().fit(X_train_num)\n",
+        "X_train_num_norm = pd.DataFrame(scaler.transform(X_train_num), columns=X_train_num.columns, index=X_train_num.index)\n",
+        "# Passo 2: Usar no X_test a mesma operação feita para a normalização de X_train\n",
+        "X_test_num_norm = pd.DataFrame(scaler.transform(X_test_num), columns=X_test_num.columns, index=X_test_num.index)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "T2RGHsQy-wyr"
+      },
+      "source": [
+        "# Codificar (One-Hot-Encoder) os atributos categóricos com 3 ou mais valores (safra, variedade e ambiente de produção)\n",
+        "\n",
+        "# Usar 'one-hot-encoder' do Pandas (get_dummies)\n",
+        "to_ohe = ['safra','variedade', 'ambProd']\n",
+        "X_train_cat_ohe = pd.get_dummies(X_train_cat[to_ohe],prefix=['safra','var','ambProd'])\n",
+        "X_test_cat_ohe = pd.get_dummies(X_test_cat[to_ohe],prefix=['safra','var','ambProd'])"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "pB1hIaXR-1Je"
+      },
+      "source": [
+        "# Juntando os DataFrames '_num' e '_cat' em um único DataFrame\n",
+        "X_train_norm = pd.concat([X_train_num_norm, X_train_cat_ohe], axis=1)\n",
+        "X_test_norm = pd.concat([X_test_num_norm, X_test_cat_ohe], axis=1)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "rrQR0xsU8KTY"
+      },
+      "source": [
+        "# Selecionar 10 melhores atributos\n",
+        "\n",
+        "X_train_norm.shape\n",
+        "\n",
+        "%%time\n",
+        "# Selecionar os K melhores atributos\n",
+        "K = 10\n",
+        "# Função \"mutual_info_regression\" que pega 2 valores e retorna os valores p para fazer score\n",
+        "selector1 = SelectKBest(mutual_info_regression, K)\n",
+        "\n",
+        "X_train_red_1 = selector1.fit_transform(X_train_norm, y_train)\n",
+        "\n",
+        "features_selected1 = selector1.get_support()\n",
+        "\n",
+        "print('Atributos Selecionados (1):',X_train_norm.columns[features_selected1])\n",
+        "\n",
+        "df_FeatSel_KBest = pd.DataFrame([X_train_norm.columns,list(selector1.scores_)],\n",
+        "                                index=['Atributo','Valor']).T\n",
+        "# T significa transposta para colocar o formato\n",
+        "# df_FeatSel_KBest.Valor.sort_values(ascending=False)\n",
+        "df_FeatSel_KBest\n",
+        "\n",
+        "# Esse é o valor da contribuição de cada atributo para a regressão\n",
+        "\n",
+        "# posso criar um novo atributo indicando a qual classe esses atributos pertencem\n",
+        "# Já consigo fazer gráfico interessante\n",
+        "\n",
+        "# Construção dos conjuntos de treino\n",
+        "\n",
+        "X_train_red_1 = pd.DataFrame(X_train_red_1, columns=X_train_norm.columns[features_selected1])\n",
+        "X_test_red_1 = pd.DataFrame(X_test_norm, columns=X_train_norm.columns[features_selected1])\n",
+        "\n",
+        "X_train_norm.head(1)\n",
+        "\n",
+        "X_train_red_1.head(1)\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ClMiupxA--uX"
+      },
+      "source": [
+        "Modelagem"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "N92lw9st_Fqa"
+      },
+      "source": [
+        "Baseline"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "T2gXwLjl--LH"
+      },
+      "source": [
+        "# Criar um objeto 'dummy' definindo estratégia para estimativa e ajustar ao conjunto de treino\n",
+        "dummy = DummyRegressor(strategy='mean').fit(X_train_norm,y_train)\n",
+        "\n",
+        "# Fazer a predição no conjunto de teste utilizando o objeto definido e ajustado anteriormente\n",
+        "y_pred_dummy = dummy.predict(X_test_norm)\n",
+        "\n",
+        "# Calcular R2, MAE e RMSE da 'Baseline' criada utilizando 'Dummy'\n",
+        "dummy_r2, dummy_mae, dummy_rmse = metrics_reg(y_test, y_pred_dummy)\n",
+        "\n",
+        "# Apresentar os valores de R2, MAE e RMSE 'Dummy'\n",
+        "print('dummy_r2: ', dummy_r2)\n",
+        "print('dummy_mae:', dummy_mae)\n",
+        "print('dummy_rmse:', dummy_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "rkrB7wzq_ITB"
+      },
+      "source": [
+        "# Calcular métricas para TchEst (produtividade estimada) visando comparação do modelo\n",
+        "\n",
+        "# Calcular R2, MAE e RMSE de TCH estimado (tchEst)\n",
+        "tchEst_r2, tchEst_mae, tchEst_rmse = metrics_reg(y_test, X_test.tchEst)\n",
+        "\n",
+        "# Apresentar os valores de R2, MAE e RMSE (tchEst)\n",
+        "print('tchEst_r2: ', tchEst_r2)\n",
+        "print('tchEst_mae:', tchEst_mae)\n",
+        "print('tchEst_rmse:', tchEst_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "VeOYqUya_PJh"
+      },
+      "source": [
+        "KNN"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "cJzSDi43_RxE"
+      },
+      "source": [
+        "# Otimizar hiperparâmetro K\n",
+        "%%time\n",
+        "\n",
+        "faixa_param = {'n_neighbors':np.arange(1,100)}\n",
+        "n_iter = 200\n",
+        "\n",
+        "opt_params = rnd_hyper_tunning(KNeighborsRegressor(),\n",
+        "                               faixa_param,\n",
+        "                               n_iter)\n",
+        "\n",
+        "print('KNN opt_params:', opt_params)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "hNvHmJce_ToK"
+      },
+      "source": [
+        "%%time\n",
+        "\n",
+        "# Construir o modelo com os hiperparâmetros otimizados e ajustar ao conjunto de treino\n",
+        "knn = KNeighborsRegressor(n_neighbors=opt_params['n_neighbors']).fit(X_train_norm, y_train)\n",
+        "\n",
+        "# Fazer predição no conjunto de teste\n",
+        "y_pred_knn = knn.predict(X_test_norm)\n",
+        "\n",
+        "# Avaliar o modelo\n",
+        "\n",
+        "# Calcular e apresentar R2, MAE e RMSE\n",
+        "knn_r2, knn_mae, knn_rmse = metrics_reg(y_test, y_pred_knn)\n",
+        "\n",
+        "print('knn_r2: ', knn_r2)\n",
+        "print('knn_mae: ', knn_mae)\n",
+        "print('knn_rmse: ', knn_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "GqaGocVa_yQ5"
+      },
+      "source": [
+        "Árvore de decisão"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "EsbHoWQo_0Eg"
+      },
+      "source": [
+        "# Otimizar hiperparâmetros:\n",
+        "# - max_depth: 2 a 10\n",
+        "# - min_samples_split: 2 a 11\n",
+        "# - min_samples_leaf: 2 a 11\n",
+        "%%time\n",
+        "\n",
+        "faixa_param = {'max_depth':np.arange(2,11),\n",
+        "               'min_samples_split':np.arange(2,12),\n",
+        "               'min_samples_leaf':np.arange(2,12)}\n",
+        "n_iter = 200\n",
+        "\n",
+        "opt_params = rnd_hyper_tunning(DecisionTreeRegressor(),\n",
+        "                               faixa_param,\n",
+        "                               n_iter)\n",
+        "\n",
+        "print('Árvore de Decisão opt_params:', opt_params)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "jbJBcGXG_4Zl"
+      },
+      "source": [
+        "%%time\n",
+        "\n",
+        "# Construir o modelo com os hiperparâmetros otimizados e ajustar ao conjunto de treino\n",
+        "dt = DecisionTreeRegressor(max_depth=opt_params['max_depth'],\n",
+        "                           min_samples_split=opt_params['min_samples_split'],\n",
+        "                           min_samples_leaf=opt_params['min_samples_leaf']).fit(X_train_norm, y_train)\n",
+        "\n",
+        "# Fazer predição no conjunto de teste\n",
+        "y_pred_dt = dt.predict(X_test_norm)\n",
+        "\n",
+        "# Avaliar o modelo\n",
+        "\n",
+        "# Calcular e apresentar R2, MAE e RMSE\n",
+        "dt_r2, dt_mae, dt_rmse = metrics_reg(y_test, y_pred_dt)\n",
+        "\n",
+        "print('dt_r2: ', dt_r2)\n",
+        "print('dt_mae: ', dt_mae)\n",
+        "print('dt_rmse: ', dt_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "yVBwR81q_71s"
+      },
+      "source": [
+        "Regressão linear"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "z5uXccsa_-vk"
+      },
+      "source": [
+        "# Não há otimização de hiperparâmetros\n",
+        "\n",
+        "%%time\n",
+        "\n",
+        "# Construir o modelo\n",
+        "\n",
+        "# Definir objeto com o classificador\n",
+        "linReg = LinearRegression()\n",
+        "\n",
+        "# Ajustar o modelo ao conjunto de treino\n",
+        "linReg.fit(X_train_norm, y_train)\n",
+        "\n",
+        "# Fazer predição no conjunto de teste\n",
+        "y_pred_linReg = linReg.predict(X_test_norm)\n",
+        "\n",
+        "# Avaliar o modelo\n",
+        "\n",
+        "# Calcular e apresentar R2, MAE e RMSE\n",
+        "linReg_r2, linReg_mae, linReg_rmse = metrics_reg(y_test, y_pred_linReg)\n",
+        "\n",
+        "print('linReg_r2: ', linReg_r2)\n",
+        "print('linReg_mae: ', linReg_mae)\n",
+        "print('linReg_rmse: ', linReg_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "dPd-qUaG8dhI"
+      },
+      "source": [
+        "# Verificar coeficientes\n",
+        "b0 = linReg.intercept_\n",
+        "b1 = linReg.coef_\n",
+        "print('b0 = ', b0)\n",
+        "print('b1 = ', b1)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "BpeQmF2D8jVZ"
+      },
+      "source": [
+        "df_coef = pd.DataFrame([X_test_norm.columns, b1],\n",
+        "                       index=['Atributo','Coeficiente']).T\n",
+        "df_coef"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "L_nd5lyW80Z8"
+      },
+      "source": [
+        "LASSO \n",
+        "Regularização"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "iR-Ra9_98zKF"
+      },
+      "source": [
+        "%%time\n",
+        "# Otimizar hiperparâmetro lambda (na biblioteca Lasso, esse parâmetro tem o nome de 'alpha')\n",
+        "faixa_param = {'alpha':np.arange(1e-3,1e+3,1e-3)}\n",
+        "n_iter = 200\n",
+        "\n",
+        "opt_params = rnd_hyper_tunning(Lasso(),\n",
+        "                               faixa_param,\n",
+        "                               n_iter)\n",
+        "\n",
+        "print('Lasso opt_params:', opt_params)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1eY0vjzN88ZP"
+      },
+      "source": [
+        "%%time\n",
+        "\n",
+        "# Construir o modelo\n",
+        "\n",
+        "# Definir objeto com o classificador\n",
+        "lassoReg = Lasso(alpha=opt_params['alpha'])\n",
+        "\n",
+        "# Ajustar o modelo ao conjunto de treino\n",
+        "lassoReg.fit(X_train_norm, y_train)\n",
+        "\n",
+        "# Fazer predição no conjunto de teste\n",
+        "y_pred_lasso = lassoReg.predict(X_test_norm)\n",
+        "\n",
+        "# Avaliar o modelo\n",
+        "\n",
+        "# Calcular e apresentar R2, MAE e RMSE\n",
+        "lasso_r2, lasso_mae, lasso_rmse = metrics_reg(y_test, y_pred_lasso)\n",
+        "\n",
+        "print('lasso_r2: ', lasso_r2)\n",
+        "print('lasso_mae: ', lasso_mae)\n",
+        "print('lasso_rmse: ', lasso_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "zjyYiu0d9opE"
+      },
+      "source": [
+        "RIDGE Regularização"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "rVO-6Iso9rQF"
+      },
+      "source": [
+        "%%time\n",
+        "# Otimizar hiperparâmetro lambda (na biblioteca Lasso, esse parâmetro tem o nome de 'alpha')\n",
+        "faixa_param = {'alpha':np.arange(1e-3,1e+3,1e-3)}\n",
+        "n_iter = 200\n",
+        "\n",
+        "opt_params = rnd_hyper_tunning(Ridge(),\n",
+        "                               faixa_param,\n",
+        "                               n_iter)\n",
+        "\n",
+        "print('Ridge opt_params:', opt_params)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "-8bJQOaN9tVC"
+      },
+      "source": [
+        "%%time\n",
+        "\n",
+        "# Construir o modelo\n",
+        "\n",
+        "# Definir objeto com o classificador\n",
+        "ridgeReg = Ridge(alpha=opt_params['alpha'])\n",
+        "\n",
+        "# Ajustar o modelo ao conjunto de treino\n",
+        "ridgeReg.fit(X_train_norm, y_train)\n",
+        "\n",
+        "# Fazer predição no conjunto de teste\n",
+        "y_pred_ridge = ridgeReg.predict(X_test_norm)\n",
+        "\n",
+        "# Avaliar o modelo\n",
+        "\n",
+        "# Calcular e apresentar R2, MAE e RMSE\n",
+        "ridge_r2, ridge_mae, ridge_rmse = metrics_reg(y_test, y_pred_ridge)\n",
+        "\n",
+        "print('ridge_r2: ', ridge_r2)\n",
+        "print('ridge_mae: ', ridge_mae)\n",
+        "print('ridge_rmse: ', ridge_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "amfF9W7c9xlH"
+      },
+      "source": [
+        "# Verificar coeficientes\n",
+        "b0 = ridgeReg.intercept_\n",
+        "b1 = ridgeReg.coef_\n",
+        "print('b0 = ', b0)\n",
+        "print('b1 = ', b1)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "edNrHHOO90n3"
+      },
+      "source": [
+        "df_coef = pd.DataFrame([X_test_norm.columns, b1],\n",
+        "                       index=['Atributo','Coeficiente']).T\n",
+        "df_coef"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "gs0d3LFI9-B9"
+      },
+      "source": [
+        "Avaliação dos modelos"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "IgcRG4pr-BO2"
+      },
+      "source": [
+        "# Construir uma list com o R2 dos modelos (+dummy + tchEst)\n",
+        "r2_mod = [linReg_r2, lasso_r2, ridge_r2]\n",
+        "\n",
+        "# Construir uma list com o MAE dos modelos\n",
+        "mae_mod = [linReg_mae, lasso_mae, ridge_mae]\n",
+        "\n",
+        "# Construir uma list com o RMSE dos modelos\n",
+        "rmse_mod =  [linReg_rmse, lasso_rmse, ridge_rmse]\n",
+        "\n",
+        "# Tempo para otimizar hiperparâmetro\n",
+        "t_opt_hyp = ['-', '8.48 s', '6.16 s']\n",
+        "\n",
+        "# Tempo para construir modelo com hiperparâmetro já otimizado\n",
+        "t_mod = ['43.8 ms', '18.0 ms', '14.3 ms']\n",
+        "\n",
+        "\n",
+        "# Construir um DataFrame com os valores de R2, MAE e RMSE\n",
+        "df_mod = pd.DataFrame([r2_mod, mae_mod, rmse_mod, t_opt_hyp, t_mod],\n",
+        "                      index = ['R2','MAE','RMSE','t Opt Hyp', 't Const Mod'],\n",
+        "                      columns = ['Regressão Linear','Lasso','Ridge']).T\n",
+        "\n",
+        "df_mod"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "oP-gvy9p-Kwy"
+      },
+      "source": [
+        "Regressão Linear SEM ATRIBUTOS EXCLUÍDOS COM LASSO"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "vqteFFw3-JnO"
+      },
+      "source": [
+        "# Construir uma list com o R2 dos modelos (+dummy + tchEst)\n",
+        "r2_mod = [linReg_r2, lasso_r2, ridge_r2]\n",
+        "\n",
+        "# Construir uma list com o MAE dos modelos\n",
+        "mae_mod = [linReg_mae, lasso_mae, ridge_mae]\n",
+        "\n",
+        "# Construir uma list com o RMSE dos modelos\n",
+        "rmse_mod =  [linReg_rmse, lasso_rmse, ridge_rmse]\n",
+        "\n",
+        "# Tempo para otimizar hiperparâmetro\n",
+        "t_opt_hyp = ['-', '8.48 s', '6.16 s']\n",
+        "\n",
+        "# Tempo para construir modelo com hiperparâmetro já otimizado\n",
+        "t_mod = ['43.8 ms', '18.0 ms', '14.3 ms']\n",
+        "\n",
+        "\n",
+        "# Construir um DataFrame com os valores de R2, MAE e RMSE\n",
+        "df_mod = pd.DataFrame([r2_mod, mae_mod, rmse_mod, t_opt_hyp, t_mod],\n",
+        "                      index = ['R2','MAE','RMSE','t Opt Hyp', 't Const Mod'],\n",
+        "                      columns = ['Regressão Linear','Lasso','Ridge']).T\n",
+        "\n",
+        "df_mod"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "hb4M3mH0-Sb6"
+      },
+      "source": [
+        "%%time\n",
+        "\n",
+        "# Construir o modelo\n",
+        "\n",
+        "# Definir objeto com o classificador\n",
+        "linRegNovo = LinearRegression()\n",
+        "\n",
+        "# Ajustar o modelo ao conjunto de treino\n",
+        "linRegNovo.fit(X_train_norm_novo, y_train)\n",
+        "\n",
+        "# Fazer predição no conjunto de teste\n",
+        "y_pred_linRegNovo = linRegNovo.predict(X_test_norm_novo)\n",
+        "\n",
+        "# Avaliar o modelo\n",
+        "\n",
+        "# Calcular e apresentar R2, MAE e RMSE\n",
+        "linRegNovo_r2, linRegNovo_mae, linRegNovo_rmse = metrics_reg(y_test, y_pred_linRegNovo)\n",
+        "\n",
+        "print('linRegNovo_r2: ', linRegNovo_r2)\n",
+        "print('linRegNovo_mae: ', linRegNovo_mae)\n",
+        "print('linRegNovo_rmse: ', linRegNovo_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Ne2N5UtMAF_r"
+      },
+      "source": [
+        "Bagging"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "NpnYSWB3ACh0"
+      },
+      "source": [
+        "# Otimizar hiperparâmetros:\n",
+        "# - n_estimators: 10 a 200, com passo 4\n",
+        "%%time\n",
+        "\n",
+        "# Definir o grid dos hiperparâmetros \n",
+        "faixa_param = {'n_estimators': np.arange(10,200, 4)}\n",
+        "n_iter = 30\n",
+        "\n",
+        "opt_params = rnd_hyper_tunning(BaggingRegressor(), faixa_param, n_iter)\n",
+        "print('Bagging opt_params:', opt_params)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "CzGSL0snAKpB"
+      },
+      "source": [
+        "%%time\n",
+        "\n",
+        "# Construir o classificador com os hiperparâmetros otimizados e ajustar ao conjunto de treino\n",
+        "bag = BaggingRegressor(n_estimators=opt_params['n_estimators']).fit(X_train_norm, y_train)\n",
+        "\n",
+        "# Fazer predição no conjunto de teste\n",
+        "y_pred_bag = bag.predict(X_test_norm)\n",
+        "\n",
+        "# Avaliar o modelo\n",
+        "\n",
+        "# Calcular e apresentar R2, MAE e RMSE\n",
+        "bag_r2, bag_mae, bag_rmse = metrics_reg(y_test, y_pred_bag)\n",
+        "\n",
+        "print('bag_r2: ', bag_r2)\n",
+        "print('bag_MAE: ', bag_mae)\n",
+        "print('bag_RMSE: ', bag_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "2V-i1VE4AOVX"
+      },
+      "source": [
+        "Random Forest"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "yTyR-nAVAQdK"
+      },
+      "source": [
+        "# Otimizar hiperparâmetros:\n",
+        "# - n_estimators: 100 a 700, variando de 50 em 50\n",
+        "# - max_features: 10% a 80%, variando de 10% em 10% (utilizar valores percentuais entre 0.1 e 0.8)\n",
+        "# - max_depth: 10 a 20, variando de 2 em 2\n",
+        "%%time\n",
+        "\n",
+        "# Definir o grid dos hiperparâmetros \n",
+        "faixa_param = {'n_estimators':np.arange(100,700,50),\n",
+        "               'max_features':np.arange(0.1,0.81,0.1),\n",
+        "               'max_depth':np.arange(10,20,2)}\n",
+        "n_iter = 20\n",
+        "\n",
+        "opt_params = rnd_hyper_tunning(RandomForestRegressor(), faixa_param, n_iter)\n",
+        "print('Random Forest opt_params:', opt_params)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "wg6DB6vKAVvU"
+      },
+      "source": [
+        "%%time\n",
+        "\n",
+        "# Construir o classificador com os hiperparâmetros otimizados e ajustar ao conjunto de treino\n",
+        "rf = BaggingRegressor(n_estimators=opt_params['n_estimators']).fit(X_train_norm, y_train)\n",
+        "\n",
+        "# Fazer predição no conjunto de teste\n",
+        "y_pred_rf = rf.predict(X_test_norm)\n",
+        "\n",
+        "# Avaliar o modelo\n",
+        "\n",
+        "# Calcular e apresentar R2, MAE e RMSE\n",
+        "rf_r2, rf_mae, rf_rmse = metrics_reg(y_test, y_pred_rf)\n",
+        "\n",
+        "print('rf_r2: ', rf_r2)\n",
+        "print('rf_MAE: ', rf_mae)\n",
+        "print('rf_RMSE: ', rf_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Hgo-QmLkAaIE"
+      },
+      "source": [
+        "XGBoost"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "MeF-JbcwAbqG"
+      },
+      "source": [
+        "# Otimizar hiperparâmetros:\n",
+        "# - n_estimators: 100 a 500, variando de 100 em 100\n",
+        "# - learning_rate: [0.01, 0.05, 0.1, 0.3, 0.5, 0.7, 0.9]\n",
+        "# - max_depth: 5 a 15, variando de 2 em 2\n",
+        "%%time\n",
+        "\n",
+        "# Definir o grid dos hiperparâmetros \n",
+        "faixa_param = {'n_estimators':np.arange(300,701,50),\n",
+        "               'learning_rate':[0.005, 0.007, 0.010, 0.012, 0.015],\n",
+        "               'max_depth':np.arange(5,16,2)}\n",
+        "n_iter = 25\n",
+        "\n",
+        "opt_params = rnd_hyper_tunning(xgb.XGBRegressor(objective='reg:squarederror'), faixa_param, n_iter)\n",
+        "print('XGBoost opt_params:', opt_params)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "yVacjK4JAgK-"
+      },
+      "source": [
+        "%%time\n",
+        "\n",
+        "# Construir o classificador com os hiperparâmetros otimizados e ajustar ao conjunto de treino\n",
+        "xgb = xgb.XGBRegressor(objective='reg:squarederror',\n",
+        "                       n_estimators=opt_params['n_estimators'],\n",
+        "                       learning_rate=opt_params['learning_rate'],\n",
+        "                       max_depth=opt_params['max_depth']).fit(X_train_norm, y_train)\n",
+        "\n",
+        "# Fazer predição no conjunto de teste\n",
+        "y_pred_xgb = xgb.predict(X_test_norm)\n",
+        "\n",
+        "# Avaliar o modelo\n",
+        "\n",
+        "# Calcular e apresentar R2, MAE e RMSE\n",
+        "xgb_r2, xgb_mae, xgb_rmse = metrics_reg(y_test, y_pred_xgb)\n",
+        "\n",
+        "print('xgb_r2: ', xgb_r2)\n",
+        "print('xgb_MAE: ', xgb_mae)\n",
+        "print('xgb_RMSE: ', xgb_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "lcOA3hedAn7F"
+      },
+      "source": [
+        "SVM"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Ve0Fn-DJAnBQ"
+      },
+      "source": [
+        "# Otimizar hiperparâmetros:\n",
+        "# - C: 500 a 800, com passo 0.1 (np.arange(1e-3,1e+3,1e-3)) \n",
+        "# - gamma: 5 a 8, com passo 0.1 (np.arange(1e-2,1e+2,1e-2))\n",
+        "%%time\n",
+        "\n",
+        "faixa_param = {'C': np.arange(1e-3,1e+3,1e-3),\n",
+        "               'gamma': np.arange(1e-2,1e+2,1e-2)}\n",
+        "n_iter = 20\n",
+        "\n",
+        "opt_params = rnd_hyper_tunning(SVR(),\n",
+        "                               faixa_param,\n",
+        "                               n_iter)\n",
+        "\n",
+        "print('SVM opt_params:', opt_params)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "zfobpHH_AswH"
+      },
+      "source": [
+        "%%time\n",
+        "\n",
+        "# Construir o modelo com os hiperparâmetros otimizados e ajustar ao conjunto de treino\n",
+        "svm = SVR(C=opt_params['C'],\n",
+        "          gamma=opt_params['gamma']).fit(X_train_norm, y_train)\n",
+        "\n",
+        "# Fazer predição no conjunto de teste\n",
+        "y_pred_svm = svm.predict(X_test_norm)\n",
+        "\n",
+        "# Avaliar o modelo\n",
+        "\n",
+        "# Calcular e apresentar R2, MAE e RMSE\n",
+        "svm_r2, svm_mae, svm_rmse = metrics_reg(y_test, y_pred_svm)\n",
+        "\n",
+        "print('svm_r2: ', svm_r2)\n",
+        "print('svm_mae: ', svm_mae)\n",
+        "print('svm_rmse: ', svm_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "AcD6jdzPA0gs"
+      },
+      "source": [
+        "Redes Neurais"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "lbixgHSdAzBf"
+      },
+      "source": [
+        "# Otimizar hiperparâmetros:\n",
+        "# - hidden_layer_sizes\n",
+        "#   . Deve ser fornecida no formato de 'tuplas'. \n",
+        "#   . Exemplos: (10,10,10) representa 3 camadas, cada uma com 10 neurônios\n",
+        "#               (10,15,20) representa 3 camadas, sendo a primeira com 10 neurônios, a segunda, com 15 neurônios e a terceira, com 20 neurônios\n",
+        "\n",
+        "# - learning_rate_init\n",
+        "#   . Valor inicial de learning_rate. Se learning_rate for 'constant', esse será o valor do passo de aprendizagem.\n",
+        "#                                     Se learning_rate não for constante (somente para solvers sgd e adam), esse será o valor inicial do passo de aprendizagem.\n",
+        "\n",
+        "\n",
+        "# - hidden_layer_sizes: [(5,5),(5,5,5),(10,10),(10,10,10),(15,15),(15,15,15)]\n",
+        "# - learning_rate: 0.01\n",
+        "%%time\n",
+        "\n",
+        "# Definir o grid dos hiperparâmetros \n",
+        "faixa_param = {'hidden_layer_sizes': [(5,5),(5,5,5),(10,10),(10,10,10),(15,15),(15,15,15)],\n",
+        "               'max_iter':[2000],\n",
+        "               'learning_rate_init':[0.01,0.1,1,10]}\n",
+        "\n",
+        "n_iter = 3\n",
+        "\n",
+        "opt_params = rnd_hyper_tunning(MLPRegressor(), faixa_param, n_iter)\n",
+        "print('MLP opt_params:', opt_params)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "bSmpQcmyA6v2"
+      },
+      "source": [
+        "%%time\n",
+        "\n",
+        "# Construir o classificador com os hiperparâmetros otimizados e ajustar ao conjunto de treino\n",
+        "mlp = MLPRegressor(hidden_layer_sizes=opt_params['hidden_layer_sizes'],\n",
+        "                   learning_rate_init= opt_params['learning_rate_init'],\n",
+        "                   max_iter=opt_params['max_iter'],\n",
+        "                   random_state=2021).fit(X_train_norm, y_train) \n",
+        "\n",
+        "# Fazer predição no conjunto de teste\n",
+        "y_pred_mlp = mlp.predict(X_test_norm)\n",
+        "\n",
+        "# Avaliar o modelo\n",
+        "\n",
+        "# Calcular e apresentar R2, MAE e RMSE\n",
+        "mlp_r2, mlp_mae, mlp_rmse = metrics_reg(y_test, y_pred_mlp)\n",
+        "\n",
+        "print('mlp_r2: ', mlp_r2)\n",
+        "print('mlp_MAE: ', mlp_mae)\n",
+        "print('mlp_RMSE: ', mlp_rmse)"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "YZdg4YCoBiJ6"
+      },
+      "source": [
+        "Avaliação do modelo (pós-treino)"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "kHhmvlCrBmbs"
+      },
+      "source": [
+        "# Construir um dataframe com as predições do modelo, recuperando os índices do conjunto de teste\n",
+        "df_erros = pd.DataFrame([y_pred_dt, y_pred_xgb, y_pred_mlp],\n",
+        "                        columns=y_test.index,\n",
+        "                        index=['tchPredDT', 'tchPredXGBoost', 'tchPredMLP']).T\n",
+        "df_erros.head()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "giHWj_z2Bp5D"
+      },
+      "source": [
+        "# Acrescentar ao dataframe os valores de de tchReal e tchEst do conjunto de teste\n",
+        "df_erros = pd.concat([y_test, X_test.tchEst, df_erros],\n",
+        "                     axis = 1)\n",
+        "df_erros.head()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "xJEx2HPXBtKs"
+      },
+      "source": [
+        "# Calcular os erros das predições e da estimativa\n",
+        "df_erros['ErroDT'] = df_erros.tchReal - df_erros.tchPredDT\n",
+        "df_erros['ErroXGBoost'] = df_erros.tchReal - df_erros.tchPredXGBoost\n",
+        "df_erros['ErroMLP'] = df_erros.tchReal - df_erros.tchPredMLP\n",
+        "df_erros['ErrotchEst'] = df_erros.tchReal - df_erros.tchEst\n",
+        "df_erros.head()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "rhESH0zTBxOF"
+      },
+      "source": [
+        "# Apresentar dataframe dos Erros, criando um novo dataframe df_erros\n",
+        "df_erros = df_erros[['ErroDT', 'ErroXGBoost', 'ErroMLP', 'ErrotchEst']].reset_index(drop=True)\n",
+        "df_erros.head()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "yhnc9NB4B0V5"
+      },
+      "source": [
+        "# tchReal (já pensando no gráfico scatter)\n",
+        "# criando um df auxiliar com o valor da produção real, para depois juntar com o dataframe de erros\n",
+        "dfaux = df.tchReal"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "zt5rGKpxB3qs"
+      },
+      "source": [
+        "arr = dfaux.to_numpy()"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "KCyKaMayB5lM"
+      },
+      "source": [
+        "arr"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "pbI3mZtwB7rs"
+      },
+      "source": [
+        "dfaux2 = pd.DataFrame(data = arr, columns=['tchReal'])"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "HnTRpPWiB_Hd"
+      },
+      "source": [
+        "dfaux2"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "NNOC35glCCtf"
+      },
+      "source": [
+        "# juntando o dataframe dos erros com o dataframe da produção real\n",
+        "df_final = pd.concat([dfaux2.reset_index(drop=True), df_erros.reset_index(drop=True)], axis=1) "
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "vDsloIbuCFdl"
+      },
+      "source": [
+        "# Dataframe criado apenas para fins de ilustração, para facilitar a plotagem do gráfico scatter\n",
+        "df_final"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "95iNAKAnCKJn"
+      },
+      "source": [
+        "fig, axes = plt.subplots(2,2, figsize=(10,10), sharex=False, sharey=False)\n",
+        "\n",
+        "sns.histplot(ax=axes[0,0], data=df_erros.ErroDT, bins=10);\n",
+        "sns.histplot(ax=axes[0,1], data=df_erros.ErroXGBoost, bins=10);\n",
+        "sns.histplot(ax=axes[1,0], data=df_erros.ErroMLP, bins=10);\n",
+        "sns.histplot(ax=axes[1,1], data=df_erros.ErrotchEst, bins=10);"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "CEg-TxMtCLM5"
+      },
+      "source": [
+        "fig, axs = plt.subplots(2, 2, figsize=(10, 10))\n",
+        "axs[0, 0].scatter(df_final.tchReal, df_final.ErroDT)\n",
+        "axs[0, 0].set_title('Decision Tree')\n",
+        "axs[0, 1].scatter(df_final.tchReal, df_final.ErroXGBoost)\n",
+        "axs[0, 1].set_title('XGBoost')\n",
+        "axs[1, 0].scatter(df_final.tchReal, df_final.ErroMLP)\n",
+        "axs[1, 0].set_title('Redes Neurais')\n",
+        "axs[1, 1].scatter(df_final.tchReal, df_final.ErrotchEst)\n",
+        "axs[1, 1].set_title('Produção estimada')"
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Q3uV350skj-p"
+      },
+      "source": [
+        "REDE COMPLEXA"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "tGnlzT2GkmPr"
+      },
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "import numpy as np\n",
+        "import networkx as nx\n",
+        "import random as rd\n",
+        "import time\n",
+        "\n",
+        "def allpaths(g):\n",
+        "    nodes=[i for i in g.nodes()]\n",
+        "    sources=[]\n",
+        "    sinks=[]\n",
+        "    for i in nodes:\n",
+        "        if g.out_degree(i)==0:\n",
+        "            sinks.append(i)\n",
+        "        if g.in_degree(i)==0:\n",
+        "            sources.append(i)\n",
+        "    asp=[]\n",
+        "    for i in sources:\n",
+        "        for j in sinks:\n",
+        "            for path in nx.all_simple_paths(g,i,j):\n",
+        "                asp.append(path)\n",
+        "    return asp\n",
+        "\n",
+        "def spc(g,asp):\n",
+        "    wg={}\n",
+        "    for i in g.edges():\n",
+        "        wg[i]=0\n",
+        "    for path in map(nx.utils.pairwise, asp):\n",
+        "        for (u,v) in path:\n",
+        "            wg[(u,v)]+=1\n",
+        "    return wg\n",
+        "\n",
+        "def mainpath(g):\n",
+        "    asp=allpaths(g)\n",
+        "    wg=spc(g,asp)\n",
+        "    m=0\n",
+        "    p=0\n",
+        "    for path in asp:\n",
+        "       pt=nx.utils.pairwise(path)\n",
+        "       v=[wg[i] for i in pt]\n",
+        "       n=sum(v)\n",
+        "       if n>m:\n",
+        "           m=n\n",
+        "           p=path\n",
+        "    return p\n",
+        "\n",
+        "def population(g,n):\n",
+        "    nodes=[i for i in g.nodes()]\n",
+        "    sources=[]\n",
+        "    sinks=[]\n",
+        "    for i in nodes:\n",
+        "        if g.out_degree(i)==0:\n",
+        "            sinks.append(i)\n",
+        "        if g.in_degree(i)==0:\n",
+        "            sources.append(i)\n",
+        "    out=[]\n",
+        "    for i in range(n):\n",
+        "        u=rd.choice(sources)\n",
+        "        v=rd.choice(sinks)\n",
+        "        path = next(nx.all_simple_paths(g, source=u, target=v))\n",
+        "        out.append(path)\n",
+        "    return out\n",
+        "\n",
+        "def mutation(g,path):\n",
+        "    "
+      ],
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "f8eD1GVyk1XQ"
+      },
+      "source": [
+        "import math\n",
+        "import sys\n",
+        "import networkx as nx\n",
+        "import matplotlib.pyplot as plt\n",
+        "import pandas as pd\n",
+        "import pydot\n",
+        "from networkx.drawing.nx_pydot import graphviz_layout\n",
+        "import pathanalysis as pa\n",
+        "\n",
+        "#read the csv containing the links, which has two columns: tail and head of link\n",
+        "df=pd.read_csv('links.csv', sep=' ')\n",
+        "\n",
+        "#create an empty directed graph, and add edges\n",
+        "g=nx.DiGraph()\n",
+        "for i in range(len(df)):\n",
+        "    u=df.iloc[i][0]\n",
+        "    v=df.iloc[i][1]\n",
+        "    if g.has_edge(v,u):\n",
+        "        continue\n",
+        "    else:\n",
+        "        g.add_edge(v,u)\n",
+        "      \n",
+        "#calculate the main path using SPC  \n",
+        "p=pa.mainpath(g)\n",
+        "c=[]\n",
+        "size=[]\n",
+        "for i in g:\n",
+        "    if i in p:\n",
+        "        c.append('red')\n",
+        "        size.append(50)\n",
+        "    else:\n",
+        "        c.append('blue')  \n",
+        "        size.append(10)\n",
+        "\n",
+        "#plot the graph\n",
+        "plt.figure(1)\n",
+        "pos = graphviz_layout(g, prog=\"dot\")\n",
+        "nx.draw(g,pos,node_size=size,node_color=c)\n"
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
